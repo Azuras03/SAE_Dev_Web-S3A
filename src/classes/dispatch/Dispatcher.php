@@ -20,6 +20,7 @@ class Dispatcher
         <h1>Bienvenue sur le service de VOD netVOD</h1>
         
         <ul>
+        <li><a href="?action=signup">S'inscrire</a></li>
         <li><a href="?action=signin">Se connecter</a></li>
         </ul>
         HTML;
@@ -30,6 +31,10 @@ class Dispatcher
             switch ($_GET['action']) {
                 case "signin" :
                     $action = new \netvod\action\ActionSignIn();
+                    $affichage .= $action->execute();
+                    break;
+                case "signup" :
+                    $action = new \netvod\action\ActionSignUp();
                     $affichage .= $action->execute();
                     break;
             }

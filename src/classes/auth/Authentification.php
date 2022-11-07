@@ -2,7 +2,10 @@
 
 namespace netvod\auth;
 
+use iutnc\deefy\exception\AlreadyStoredException;
+use iutnc\deefy\exception\PasswordStrenghException;
 use netvod\db\ConnectionFactory;
+use netvod\exception\InvalidPropertyNameException;
 use netvod\user\User;
 
 class Authentification
@@ -23,6 +26,50 @@ class Authentification
         }
         return null;
     }
+
+    /**
+     * Method that register a new user in the database if he doesn't exist
+     * @throws InvalidPropertyNameException
+     * @throws AlreadyStoredException
+     * @throws PasswordStrenghException
+     */
+    public static function register($email, $password)
+    {
+        if (!self::checkPasswordStrengh($password, 10))
+            throw new PasswordStrenghException();
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            throw new InvalidPropertyNameException("Email invalide");
+
+        $db = ConnectionFactory::makeConnection();
+        $q1 = "SELECT email FROM User WHERE email = ?";
+        $st = $db->prepare($q1);
+
+        $st->execute([$email]);
+
+        if ($st->fetch(\PDO::FETCH_ASSOC))
+            throw new AlreadyStoredException("Utilisateur déjà dans la base.");
+
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $q2 = "INSERT INTO User (email, passwd, role) VALUES (?, ?, ?)";
+        $st2 = $db->prepare($q2);
+        $st2->execute([$email, $hash, 1]);
+
+    }
+
+    /**
+     * Check the strengh of the password sent
+     * @param string $pass
+     * @param int $long
+     * @return bool
+     */
+    public static function checkPasswordStrengh(string $pass, int $long) : bool
+    {
+        return strlen($pass) >= $long;
+    }
+
 
 
 }
