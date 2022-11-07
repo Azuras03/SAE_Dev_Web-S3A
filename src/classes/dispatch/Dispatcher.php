@@ -34,7 +34,6 @@ class Dispatcher
                     $action = new \netvod\action\ActionSignIn();
                     $affichage .= $action->execute();
                     break;
-
                 case "userinfos" :
                     $action = new \netvod\action\ActionUserInfos();
                     $affichage .= $action->execute();
