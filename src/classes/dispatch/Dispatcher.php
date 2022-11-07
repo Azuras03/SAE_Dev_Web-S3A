@@ -15,9 +15,14 @@ class Dispatcher
     public function run(): void
     {
         $affichage = "";
+        $currUser = 'invité';
+        if (isset($_SESSION['user'])){
+            $currUser = unserialize($_SESSION['user'])->email;
+        }
 
         //Affichage du header
         $affichage .= <<<HTML
+        <p>Vous êtes connecté en tant que <b>$currUser</b></p>
         <h1>Bienvenue sur le service de VOD netVOD</h1>
         
         <ul>
