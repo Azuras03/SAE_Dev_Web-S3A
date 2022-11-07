@@ -2,7 +2,7 @@
     "name": "iutnc/netvod",
     "autoload": {
         "psr-4": {
-            "Iutnc\\Netvod\\": "src/classes"
+            "iutnc\\netvod\\": "src/classes"
         }
     },
     "require": {}
