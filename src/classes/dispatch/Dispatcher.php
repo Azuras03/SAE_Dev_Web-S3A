@@ -63,10 +63,13 @@ class Dispatcher
 
             $addSerie = $db->prepare("SELECT titre, img FROM serie");
             $series = "";
+            $id = 1;
             if ($addSerie->execute()) {
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                    $series .= $donnees['titre'] . '</br>' . $minia . '</br>';
+                    $url = '?action=detail&id=' . $id;
+                    $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
+                    $id++;
                 }
             }
             echo '<h4>Liste des séries :</h4> <p>'.$series.'</p>';
