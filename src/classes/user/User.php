@@ -2,6 +2,7 @@
 
 namespace netvod\user;
 
+use netvod\db\ConnectionFactory;
 use netvod\exception\NonEditablePropertyException;
 
 class User
@@ -20,6 +21,19 @@ class User
         $this->infos = $infos;
     }
 
+    public static function userById(string $email){
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare('SELECT * FROM user WHERE email = ?');
+        if ($stmt->execute([$email])) {
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if ($user) {
+                $utilisateur = new User($user['id'], $user['email'], $user['passwd']);
+                return $utilisateur;
+            }
+        }
+        return null;
+    }
+
     public function __set(string $at, mixed $value): void
     {
         if (property_exists($this, $at)) {
@@ -27,15 +41,6 @@ class User
         } else {
             throw new NonEditablePropertyException($at);
         }
-    }
-
-    public function afficherInfos(): string
-    {
-        $retour = "";
-        foreach ($this->infos as $key => $value) {
-            $retour .= $key . ' : ' . $value . '\n';
-        }
-        return $retour;
     }
 
 }
