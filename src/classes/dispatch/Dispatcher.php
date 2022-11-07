@@ -2,6 +2,8 @@
 
 namespace netvod\dispatch;
 
+use netvod\db\ConnectionFactory;
+
 class Dispatcher
 {
 
@@ -51,7 +53,20 @@ class Dispatcher
         }
         else $affichage .= "BONJOUR A TOUS";
 
+
         $this->renderPage($affichage);
+        if(isset($_SESSION['user'])){
+            $db = ConnectionFactory::makeConnection();
+
+            $addSerie = $db->prepare("SELECT titre FROM serie");
+            $series = "";
+            if ($addSerie->execute()) {
+                while ($donnees = $addSerie->fetch()) {
+                    $series .= $donnees['titre'] . '</br>';
+                }
+            }
+            echo '<h4>Liste des séries :</h4> <p>'.$series.'</p>';
+        }
     }
 
     /**

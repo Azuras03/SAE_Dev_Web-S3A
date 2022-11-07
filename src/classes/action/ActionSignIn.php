@@ -34,13 +34,7 @@ class ActionSignIn extends Action
                 }
                 $_SESSION['user'] = serialize($user);
 
-                $addSerie = $db->prepare("SELECT titre FROM serie");
-                $series = "";
-                if ($addSerie->execute()) {
-                    while ($donnees = $addSerie->fetch()) {
-                        $series .= $donnees['titre'] . '</br>';
-                    }
-                }
+
                 return <<<HTML
                     
                     $email est connecté au service NetVOD <br>                
@@ -56,7 +50,6 @@ class ActionSignIn extends Action
                     <input type="date" name="date_naissance" value="{$user->infos[0]['date_naissance']}"><br>
                     <button type="submit">Modifier</button>
                     </form>
-                    <p>$series</p>
                    
 
                 HTML;
