@@ -24,6 +24,7 @@ class Dispatcher
         <li><a href="Index.php">Accueil</a></li>
         <li><a href="?action=signup">S'inscrire</a></li>
         <li><a href="?action=signin">Se connecter</a></li>
+        <li><a href="?action=display">Afficher catalogue</a></li>
         </ul>
         HTML;
 
@@ -40,6 +41,10 @@ class Dispatcher
                     break;
                 case "signup" :
                     $action = new \netvod\action\ActionSignUp();
+                    $affichage .= $action->execute();
+                    break;
+                case "display" :
+                    $action = new \netvod\action\ActionDisplayCatalogue();
                     $affichage .= $action->execute();
                     break;
             }
