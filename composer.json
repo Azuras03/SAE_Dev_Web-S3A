@@ -5,5 +5,7 @@
             "netvod\\": "src/classes"
         }
     },
-    "require": {}
+    "require": {
+        "ext-pdo": "*"
+    }
 }
