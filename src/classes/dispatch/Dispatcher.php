@@ -44,7 +44,18 @@ class Dispatcher
                     break;
             }
         }
-        echo $affichage;
+        else $affichage .= "BONJOUR A TOUS";
+
+        $this->renderPage($affichage);
+    }
+
+    /**
+     * Method that return string corresponding to the main content to show to user
+     * @param string $html
+     * @return void
+     */
+    private function renderPage(string $html) : void {
+        echo $html;
     }
 
 }
