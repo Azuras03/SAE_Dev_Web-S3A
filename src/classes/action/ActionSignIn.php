@@ -34,6 +34,16 @@ class ActionSignIn extends Action
                 }
                 $_SESSION['user'] = serialize($user);
 
+                $addSerie = $db->prepare("SELECT titre FROM serie");
+                $series = "";
+                $id = 1;
+                if ($addSerie->execute()) {
+                    while ($donnees = $addSerie->fetch()) {
+                        $url = '?action=detail&id=' . $id;
+                        $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a></br>';
+                        $id++;
+                    }
+                }
 
                 return <<<HTML
                     
@@ -50,6 +60,7 @@ class ActionSignIn extends Action
                     <input type="date" name="date_naissance" value="{$user->infos[0]['date_naissance']}"><br>
                     <button type="submit">Modifier</button>
                     </form>
+                    <p>$series</p>
                    
 
                 HTML;
