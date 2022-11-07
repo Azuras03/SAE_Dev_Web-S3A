@@ -3,6 +3,7 @@
 namespace netvod\action;
 
 use netvod\auth\Authentification;
+use netvod\db\ConnectionFactory;
 
 class ActionSignIn extends Action
 {
@@ -24,8 +25,18 @@ class ActionSignIn extends Action
             $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
             $user = Authentification::authenticate($email, $password);
             if ($user) {
+                $db = ConnectionFactory::makeConnection();
+                $stmt = $db->prepare("SELECT titre FROM serie");
+                $series = "";
+                if ($stmt->execute()) {
+                    while ($donnees = $stmt->fetch()) {
+                        $series .= $donnees['titre'] . '</br>';
+                    }
+                }
                 return <<<HTML
-                    $email est connecté au service NetVOD
+                    <p>$email est connecté au service NetVOD</p>
+                    <p>$series</p>
+                    
                 HTML;
 
             } else {
