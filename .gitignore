@@ -40,3 +40,5 @@ hs_err_pid*
 
 # Composer directories
 /vendor/
+composer.phar
+composer_2.phar
