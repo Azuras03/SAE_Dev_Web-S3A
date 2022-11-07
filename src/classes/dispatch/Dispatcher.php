@@ -42,6 +42,10 @@ class Dispatcher
                     $action = new \netvod\action\ActionSignUp();
                     $affichage .= $action->execute();
                     break;
+                case "detail" :
+                    $action = new \netvod\action\ActionDetailSerie();
+                    $affichage .= $action->execute();
+                    break;
             }
         }
         else $affichage .= "BONJOUR A TOUS";

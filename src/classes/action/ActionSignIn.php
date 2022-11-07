@@ -36,9 +36,12 @@ class ActionSignIn extends Action
 
                 $addSerie = $db->prepare("SELECT titre FROM serie");
                 $series = "";
+                $id = 1;
                 if ($addSerie->execute()) {
                     while ($donnees = $addSerie->fetch()) {
-                        $series .= $donnees['titre'] . '</br>';
+                        $url = '?action=detail&id=' . $id;
+                        $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a></br>';
+                        $id++;
                     }
                 }
                 return <<<HTML
