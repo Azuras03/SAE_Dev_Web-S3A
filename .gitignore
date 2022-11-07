@@ -39,4 +39,5 @@ hs_err_pid*
 
 
 # Composer directories
-/vendor/*
+/vendor
+/vendor/composer
