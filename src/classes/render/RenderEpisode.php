@@ -19,16 +19,11 @@ class RenderEpisode implements Renderer
     {
         $db = ConnectionFactory::makeConnection();
         $episode = unserialize($_SESSION['episode']);
-
-        $query = $db->prepare("SELECT * FROM episode WHERE id = ?");
-        $query->execute([$episode->id]);
-        $episodes = $query->fetchAll(\PDO::FETCH_CLASS, "netvod\Episode");
-        $episodes = $episodes[0];
         return <<<HTML
-        <h1>{$episodes->title}</h1>
-        <p>{$episodes->description}</p>
+        <h1>{$episode->titre}</h1>
+        <p>{$episode->resume}</p>
         <video width="320" height="240" controls>
-        <source src="/video/{$episodes->file}" type="video/mp4">
+        <source src="video/{$episode->file}" type="video/mp4">
         </video>
         HTML;
     }
