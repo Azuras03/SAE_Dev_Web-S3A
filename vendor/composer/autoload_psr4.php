@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Iutnc\\Netvod\\' => array($baseDir . '/src'),
+    'Iutnc\\Netvod\\' => array($baseDir . '/src/classes'),
 );
