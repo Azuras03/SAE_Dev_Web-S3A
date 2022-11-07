@@ -49,6 +49,10 @@ class Dispatcher
                     $action = new \netvod\action\ActionSignUp();
                     $affichage .= $action->execute();
                     break;
+                case "display-episode" :
+                    $action = new \netvod\action\ActionDisplayEpisode();
+                    $affichage .= $action->execute();
+                    break;
                 case "detail" :
                     $action = new \netvod\action\ActionDetailSerie();
                     $affichage .= $action->execute();

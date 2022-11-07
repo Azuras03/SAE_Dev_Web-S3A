@@ -2,6 +2,8 @@
 
 namespace netvod\user;
 
+use iutnc\deefy\exception\AlreadyStoredException;
+use netvod\auth\Authentification;
 use netvod\db\ConnectionFactory;
 use netvod\exception\NonEditablePropertyException;
 
@@ -43,4 +45,35 @@ class User
         }
     }
 
+    public function isAddEpisodeInProgress () : bool
+    {
+        if (!isset($_SESSION["episode"])) return false;
+        $episode = unserialize($_SESSION["episode"]);
+
+        $db = ConnectionFactory::makeConnection();
+        $q = "SELECT id_user, id_episode FROM `userprogressepisode` 
+                WHERE id_user = ?
+                AND id_episode = ?;";
+        $st = $db->prepare($q);
+        $st->bindParam(1, $this->id);
+        $st->bindParam(2, $episode->id);
+        $st->execute();
+
+        if ($st->fetch(\PDO::FETCH_ASSOC)) return false;
+        return true;
+    }
+
+    public function addEpisodeInProgress ()
+    {
+        if (!$this->isAddEpisodeInProgress()) return;
+
+        $episode = unserialize($_SESSION["episode"]);
+
+        $db = ConnectionFactory::makeConnection();
+        $q = "INSERT INTO `userprogressepisode` (id_user, id_episode) VALUES (?, ?)";
+        $st = $db->prepare($q);
+        $st->bindParam(1, $this->id);
+        $st->bindParam(2, $episode->id);
+        $st->execute();
+    }
 }
