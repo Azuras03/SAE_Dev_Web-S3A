@@ -13,5 +13,3 @@ ConnectionFactory::setConfig('./db.config.ini');
 //Affichage
 $dispatcher = new Dispatcher();
 $dispatcher->run();
-
-//echo 'BONJOUR A TOUS';
