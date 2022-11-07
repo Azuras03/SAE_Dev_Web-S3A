@@ -55,18 +55,18 @@ class Dispatcher
                     break;
             }
         }
-        else $affichage .= "BONJOUR A TOUS";
-
 
         $this->renderPage($affichage);
+
         if(isset($_SESSION['user'])){
             $db = ConnectionFactory::makeConnection();
 
-            $addSerie = $db->prepare("SELECT titre FROM serie");
+            $addSerie = $db->prepare("SELECT titre, img FROM serie");
             $series = "";
             if ($addSerie->execute()) {
                 while ($donnees = $addSerie->fetch()) {
-                    $series .= $donnees['titre'] . '</br>';
+                    $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
+                    $series .= $donnees['titre'] . '</br>' . $minia . '</br>';
                 }
             }
             echo '<h4>Liste des séries :</h4> <p>'.$series.'</p>';
