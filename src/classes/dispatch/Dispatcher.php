@@ -164,7 +164,8 @@ class Dispatcher
             }
             
             video {
-            padding: 5% 25% 5% 25%;
+            padding: 0 25% 5% 25%;
+            
             width: 50%;
             }
           
