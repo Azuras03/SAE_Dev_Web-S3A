@@ -17,7 +17,6 @@ class RenderEpisode implements Renderer
 
     public function render(): string
     {
-        $db = ConnectionFactory::makeConnection();
         return <<<HTML
         <h1>{$this->episode->titre}</h1>
         <p>{$this->episode->resume}</p>
