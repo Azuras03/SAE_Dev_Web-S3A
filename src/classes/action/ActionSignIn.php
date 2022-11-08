@@ -35,21 +35,8 @@ class ActionSignIn extends Action
                 $_SESSION['user'] = serialize($user);
 
                 return <<<HTML
-                    
-                    $email est connecté au service NetVOD <br>                
-                    Vous pouvez modifier vos infos personnelles </br>                                    
-                    <form method="post" action="?action=userinfos">
-                    <label>Prénom : </label>
-                    <input type="text" name="prenom" value="{$user->infos[0]['prenom']}"><br>
-                    <label>Nom : </label>
-                    <input type="text" name="nom" value="{$user->infos[0]['nom']}"><br>
-                    <label>Pseudo : </label>
-                    <input type="text" name="pseudo" value="{$user->infos[0]['pseudo']}"><br>
-                    <label>Date de naissance</label>
-                    <input type="date" name="date_naissance" value="{$user->infos[0]['date_naissance']}"><br>
-                    <button type="submit">Modifier</button>
-                    </form>                   
-
+                    $email est connecté au service NetVOD <br>
+                    Vous pouvez modifier vos informations personnelles <a href="?action=userinfos">ici</a>
                 HTML;
 
             } else {
