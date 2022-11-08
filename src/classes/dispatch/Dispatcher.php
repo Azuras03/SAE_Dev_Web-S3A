@@ -2,6 +2,7 @@
 
 namespace netvod\dispatch;
 
+use netvod\action\ActionChangeTheme;
 use netvod\action\ActionDisplayListProgress;
 use netvod\db\ConnectionFactory;
 
@@ -39,6 +40,9 @@ class Dispatcher
             HTML;
         }
 
+        echo $_SESSION['theme'];
+        $currTheme = $_SESSION['theme'];
+
         //Affichage du header
         $affichage .= <<<HTML
         <style>
@@ -58,12 +62,21 @@ class Dispatcher
                 }
             }
             
-            @keyframes colorBackgroundChange {
+            @keyframes colorBackgroundChangeLight {
                 0%{
                     background-color: #ffffff;
                 }
                 100%{
                     background-color: #f1f1f1;
+                }
+            }
+            
+            @keyframes colorBackgroundChangeDark {
+                0%{
+                    background-color: #171717;
+                }
+                100%{
+                    background-color: #0c0c0c;
                 }
             }
             
@@ -74,9 +87,10 @@ class Dispatcher
                 animation-duration: 2s;
                 transition: 1s all cubic-bezier(0, 0, 0, 1);
                 width: 100%;
-                background-color: rgb(120, 120, 120, 0.3);
                 font-family: 'Roboto', sans-serif;
-                animation: colorBackgroundChange 1s infinite alternate-reverse;
+                animation: $currTheme 1s infinite alternate-reverse;
+                background-color: rgb(120, 120, 120, 0.3);
+                margin: 0 0 0 0;
             }
             .head {
                 background-color: rgb(120, 120, 120, 0.3);
@@ -177,6 +191,7 @@ class Dispatcher
             <h1 class="bienvenue">Bienvenue sur le service de VOD netVOD</h1>
         
             <ul class="accueilPannel">
+                <a href="?action=chgtheme" class="bouton">Change Theme</a>
                 $resultatConnexion
             </ul>
         </div>
@@ -215,6 +230,13 @@ class Dispatcher
                     break;
                 case "progress-list" :
                     $action = new ActionDisplayListProgress();
+                    $affichage .= $action->execute();
+                    break;
+                case "chgtheme" :
+                    $action = new ActionChangeTheme();
+                    $affichage .= $action->execute();
+                case "signout" :
+                    $action = new \netvod\action\ActionSignOut();
                     $affichage .= $action->execute();
                     break;
             }
