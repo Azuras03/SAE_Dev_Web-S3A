@@ -2,19 +2,36 @@
 
 namespace netvod\action;
 
+use netvod\dispatch\Dispatcher;
+
 class ActionChangeTheme extends Action
 {
     public function execute(): string
     {
-        if (!isset($_SESSION['theme'])) {
+        if ($_SESSION['theme'] == 'colorBackgroundChangeLight') {
             $_SESSION['theme'] = 'colorBackgroundChangeDark';
-        } else {
-            if ($_SESSION['theme'] == 'colorBackgroundChangeLight') {
-                $_SESSION['theme'] = 'colorBackgroundChangeDark';
-            } else {
-                $_SESSION['theme'] = 'colorBackgroundChangeLight';
+            Dispatcher::$themeChangesStyle .= '
+            p{
+                color: white;
             }
+            
+            h3{
+                color: white;
+            }
+            ';
+
+        } else {
+            $_SESSION['theme'] = 'colorBackgroundChangeLight';
+            Dispatcher::$themeChangesStyle .= '
+            p{
+                color: black;
+            }
+            
+            h3{
+                color: black;
+            }
+            ';
         }
-        return 'Changé 🟢';
+        return '<p>Changé 🟢</p>';
     }
 }
