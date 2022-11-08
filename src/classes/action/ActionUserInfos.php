@@ -52,7 +52,7 @@ class ActionUserInfos extends Action
                 $user->infos[0]['date_naissance'] = $date_naissance;
                 $_SESSION['user'] = serialize($user);
                 return <<<HTML
-                Vos informations ont été modifiées
+                <h3>Vos informations ont été modifiées</h3>
             HTML;
             } else {
                 return <<<HTML
