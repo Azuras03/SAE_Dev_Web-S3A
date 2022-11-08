@@ -73,6 +73,10 @@ class Dispatcher
             $connected = true;
         }
 
+        if (!isset($_SESSION['theme'])) {
+            $_SESSION['theme'] = 'colorBackgroundChangeLight';
+        }
+
         if ($connected) {
             $resultatConnexion = <<<HTML
                 <a href="Index.php" class="bouton">Accueil</a>
@@ -217,12 +221,6 @@ class Dispatcher
                 border: solid 7px #34BBE2;
                 border-top: none;
                 padding: 10px 0 10px 0;
-            }
-            
-            body {                
-            background-color: rgb(120, 120, 120, 0.3);
-            margin: 0 0 0 0;
-            padding: 10px 10px 10px 10px;
             }
             
             video {
