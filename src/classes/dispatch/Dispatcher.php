@@ -2,7 +2,6 @@
 
 namespace netvod\dispatch;
 
-use netvod\action\ActionChangeTheme;
 use netvod\action\ActionDisplayListProgress;
 use netvod\db\ConnectionFactory;
 
@@ -59,8 +58,9 @@ class Dispatcher
                     $affichage2 .= $action->execute();
                     break;
                 case "chgtheme" :
-                    $action = new ActionChangeTheme();
+                    $action = new \netvod\action\ActionChangeTheme();
                     $affichage2 .= $action->execute();
+                    break;
                 case "signout" :
                     $action = new \netvod\action\ActionSignOut();
                     $affichage2 .= $action->execute();
@@ -73,9 +73,14 @@ class Dispatcher
             $connected = true;
         }
 
+        if (!isset($_SESSION['theme'])) {
+            $_SESSION['theme'] = 'colorBackgroundChangeLight';
+        }
+
         if ($connected) {
             $resultatConnexion = <<<HTML
                 <a href="Index.php" class="bouton">Accueil</a>
+                <a href="?action=userinfos" class="bouton">Mes informations</a>
                 <a href="?action=signout" class="bouton">Se déconnecter</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
                 <a href="?action=progress-list" class="bouton">Vos épisodes en cours 🕰️</a>
@@ -87,7 +92,6 @@ class Dispatcher
             HTML;
         }
 
-        echo $_SESSION['theme'];
         $currTheme = $_SESSION['theme'];
 
         //Affichage du header
@@ -219,12 +223,6 @@ class Dispatcher
                 padding: 10px 0 10px 0;
             }
             
-            body {                
-            background-color: rgb(120, 120, 120, 0.3);
-            margin: 0 0 0 0;
-            padding: 10px 10px 10px 10px;
-            }
-            
             video {
             padding: 0 25% 5% 25%;
             width: 50%;
@@ -242,7 +240,7 @@ class Dispatcher
                 $resultatConnexion
             </ul>
         </div>
-        HTML . $affichage2;
+        HTML. $affichage2;
 
         $this->renderPage($affichage);
 
