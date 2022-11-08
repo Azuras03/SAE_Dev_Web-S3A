@@ -18,9 +18,9 @@ class RenderEpisode implements Renderer
     public function render(): string
     {
         return <<<HTML
-        <h1>{$this->episode->titre}</h1>
-        <p>{$this->episode->resume}</p>
-        <video width="320" height="240" controls>
+        <h1 id="titreEpisode">{$this->episode->titre}</h1>
+        <p id="resumeEpisode">{$this->episode->resume}</p>
+        <video width="1730" height="550" controls>
         <source src="video/{$this->episode->file}" type="video/mp4">
         </video>
         HTML;

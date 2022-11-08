@@ -19,19 +19,18 @@ class Dispatcher
         $affichage = "";
         $connected = false;
         $currUser = 'invité';
-        if (isset($_SESSION['user'])){
+        if (isset($_SESSION['user'])) {
             $currUser = unserialize($_SESSION['user'])->email;
             $connected = true;
         }
 
-        if($connected){
+        if ($connected) {
             $resultatConnexion = <<<HTML
                 <a href="Index.php" class="bouton">Accueil</a>
                 <a href="?action=signout" class="bouton">Se déconnecter</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
             HTML;
-        }
-        else {
+        } else {
             $resultatConnexion = <<<HTML
                 <a href="?action=signup" class="bouton">S'inscrire</a>
                 <a href="?action=signin" class="bouton">Se connecter</a>
@@ -67,14 +66,13 @@ class Dispatcher
             }
             
             html{
-                font-family: "Arial",sans-serif;
                 animation-name: opacityIntro;
                 animation-direction: normal;
                 animation-iteration-count: 1;
                 animation-duration: 2s;
                 transition: 1s all cubic-bezier(0, 0, 0, 1);
                 width: 100%;
-                background-color: ;
+                background-color: rgb(120, 120, 120, 0.3);
                 font-family: 'Roboto', sans-serif;
                 animation: colorBackgroundChange 1s infinite alternate-reverse;
             }
@@ -82,7 +80,7 @@ class Dispatcher
                 background-color: rgb(120, 120, 120, 0.3);
             }
             .bienvenue {
-                color: #34BBE2;
+                color: black;
                 text-align: center;
             }
             
@@ -131,6 +129,36 @@ class Dispatcher
             
             .listSerie {
                 text-align: right;
+            }
+            
+            #titreEpisode {
+                color: black;
+                text-align: center;
+                margin-top: 30px;
+                background-color: rgb(120, 120, 120, 0.3);
+                padding: 10px 0 10px 0;
+                border: solid 7px #34BBE2;
+                border-radius: 10px;
+                margin-bottom: 0;
+            }
+            
+            #resumeEpisode {
+                color: black;
+                text-align: center;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                background-color: rgb(120, 120, 120, 0.3);
+                width: 50%;
+                margin-left: 25%;
+                margin-top: 0;
+                border: solid 7px #34BBE2;
+                border-top: none;
+                padding: 10px 0 10px 0;
+            }
+            
+            body {                
+            background-color: rgb(120, 120, 120, 0.3);
+            margin: 0 0 0 0;
             }
           
         </style>
@@ -181,7 +209,7 @@ class Dispatcher
 
         $this->renderPage($affichage);
 
-        if(isset($_SESSION['user']) && !isset($_GET['action'])){
+        if (isset($_SESSION['user']) && !isset($_GET['action'])) {
             $db = ConnectionFactory::makeConnection();
 
             $addSerie = $db->prepare("SELECT titre, img, id FROM serie");
@@ -190,7 +218,7 @@ class Dispatcher
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
                     $url = '?action=display-serie&serie=' . $donnees["id"];
-                    $series .= '<a href=' . $url . ' class="titreSerie">' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
+                    $series .= '<a href=' . $url . ' class="titreSerie">' . $donnees['titre'] . '</a><br>' . $minia . '</br>';
                 }
             }
             echo '<h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p>';
