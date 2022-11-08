@@ -56,6 +56,16 @@ class Dispatcher
                     filter: opacity(100%);
                 }
             }
+            
+            @keyframes colorBackgroundChange {
+                0%{
+                    background-color: #ffffff;
+                }
+                100%{
+                    background-color: #f1f1f1;
+                }
+            }
+            
             html{
                 font-family: "Arial",sans-serif;
                 animation-name: opacityIntro;
@@ -64,11 +74,9 @@ class Dispatcher
                 animation-duration: 2s;
                 transition: 1s all cubic-bezier(0, 0, 0, 1);
                 width: 100%;
-                background-color: #eaf1ff;
+                background-color: ;
                 font-family: 'Roboto', sans-serif;
-                background-image: url("images/backgroundAnim.gif");
-                background-repeat: no-repeat;
-                background-size: cover;
+                animation: colorBackgroundChange 1s infinite alternate-reverse;
             }
             .head {
                 background-color: rgb(120, 120, 120, 0.3);
