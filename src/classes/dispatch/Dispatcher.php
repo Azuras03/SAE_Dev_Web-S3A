@@ -21,6 +21,8 @@ class Dispatcher
         $affichage = "";
         $connected = false;
         $currUser = 'invité';
+        if(!isset($_SESSION['CSSThemeChanges']))
+        $_SESSION['CSSThemeChanges'] = '';
 
         $affichage2 = "";
         //Affichage du contenu
@@ -69,6 +71,8 @@ class Dispatcher
             }
         }
 
+
+
         if (isset($_SESSION['user'])) {
             $currUser = unserialize($_SESSION['user'])->email;
             $connected = true;
@@ -94,7 +98,7 @@ class Dispatcher
         }
 
         $currTheme = $_SESSION['theme'];
-        $themeToChange = self::$themeChangesStyle;
+        $themeToChange = $_SESSION['CSSThemeChanges'];
 
         //Affichage du header
         $affichage .= <<<HTML
@@ -148,7 +152,7 @@ class Dispatcher
             .head {
                 background-color: rgb(120, 120, 120, 0.3);
             }
-            .bienvenue {
+            h1 {
                 color: black;
                 text-align: center;
             }
@@ -157,6 +161,13 @@ class Dispatcher
                 text-align: center;
                 padding-top: 20px;              
             }
+            
+            a {
+                text-decoration: none;
+                color: #34BBE2;
+            
+            }
+            
             .bouton {
                 text-decoration: none;
                 color: white;
@@ -237,7 +248,7 @@ class Dispatcher
         <body>
         <div class="head">
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
-            <h1 class="bienvenue">Bienvenue sur le service de VOD netVOD</h1>
+            <h1>Bienvenue sur le service de VOD netVOD</h1>
         
             <ul class="accueilPannel">
                 <a href="?action=chgtheme" class="bouton">Change Theme</a>
