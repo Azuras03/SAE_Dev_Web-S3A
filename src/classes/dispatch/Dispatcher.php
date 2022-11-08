@@ -161,6 +161,8 @@ class Dispatcher
             body {                
             background-color: rgb(120, 120, 120, 0.3);
             margin: 0 0 0 0;
+            padding: 10px 10px 10px 10px;
+            }
             }
             
             video {
