@@ -18,20 +18,62 @@ class Dispatcher
     {
         $affichage = "";
         $currUser = 'invité';
-        if (isset($_SESSION['user'])){
+        if (isset($_SESSION['user'])) {
             $currUser = unserialize($_SESSION['user'])->email;
         }
 
         //Affichage du header
         $affichage .= <<<HTML
-        <p>Vous êtes connecté en tant que <b>$currUser</b></p>
-        <h1>Bienvenue sur le service de VOD netVOD</h1>
+        <style>
+            body {
+                background-image: url("/images/background.png");
+            }
+            .head {
+                background-color: black;
+            }
+            .bienvenue {
+                color: #34BBE2;
+                text-align: center;
+            }
+            
+            .accueilPannel {
+                text-align: center;
+                padding-top: 20px;              
+            }
+            
+            .bouton {
+                text-decoration: none;
+                color: white;
+                background-color: black;
+                border: solid 7px #34BBE2;
+                padding: 7px 7px 7px 7px;
+                margin: 0px 20px 0px 20px;
+            }
+            
+            .bouton:hover {
+                color: black;
+                background-color: white;
+            }
+            
+            .connection {
+                
+            }
+            
+            .nomcompte {
+                color: red;
+            }
+          
+        </style>
+        <div class="head">
+            <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
+            <h1 class="bienvenue">Bienvenue sur le service de VOD netVOD</h1>
         
-        <ul>
-        <li><a href="Index.php">Accueil</a></li>
-        <li><a href="?action=signup">S'inscrire</a></li>
-        <li><a href="?action=signin">Se connecter</a></li>
-        </ul>
+            <ul class="accueilPannel">
+                <a href="Index.php" class="bouton">Accueil</a>
+                <a href="?action=signup" class="bouton">S'inscrire</a>
+                <a href="?action=signin" class="bouton">Se connecter</a>
+            </ul>
+        </div>
         HTML;
 
         //Affichage du contenu
@@ -58,7 +100,7 @@ class Dispatcher
 
         $this->renderPage($affichage);
 
-        if(isset($_SESSION['user'])){
+        if (isset($_SESSION['user'])) {
             $db = ConnectionFactory::makeConnection();
 
             $addSerie = $db->prepare("SELECT titre, img FROM serie");
@@ -68,11 +110,11 @@ class Dispatcher
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
                     $url = '?action=detail&id=' . $id;
-                    $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
+                    $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>' . $minia . '</br>';
                     $id++;
                 }
             }
-            echo '<h4>Liste des séries :</h4> <p>'.$series.'</p>';
+            echo '<h4>Liste des séries :</h4> <p>' . $series . '</p>';
         }
     }
 
@@ -81,7 +123,8 @@ class Dispatcher
      * @param string $html
      * @return void
      */
-    private function renderPage(string $html) : void {
+    private function renderPage(string $html): void
+    {
         echo $html;
     }
 
