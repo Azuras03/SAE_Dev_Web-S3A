@@ -36,13 +36,10 @@ class ActionDetailSerie extends Action
         }
 
         return <<<HTML
-
-            <p>Détails de la série $titre :</p>
-            <p>$detail</br>
-            Descriptif : $desc</p>
-
-            <p>$episode</p>
-          
+                <h3>Détails de la série $titre :</h3>
+                <p>$detail</br>
+                Descriptif : $desc</p>
+                <p>$episode</p>        
         HTML;
 
     }

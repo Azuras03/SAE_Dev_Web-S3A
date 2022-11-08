@@ -29,7 +29,7 @@ class Dispatcher
                 background-image: url("/images/background.png");
             }
             .head {
-                background-color: black;
+                background-color: rgb(120, 120, 120, 0.3);
             }
             .bienvenue {
                 color: #34BBE2;
@@ -56,11 +56,22 @@ class Dispatcher
             }
             
             .connection {
-                
+                padding-top: 10px;
+                padding-left: 10px;
             }
             
             .nomcompte {
                 color: red;
+            }
+            
+            .inscription {
+                color: green;
+            }
+            
+            h3 {
+                color: black;
+                text-align: center;
+                padding-top: 10px;
             }
           
         </style>
@@ -114,7 +125,7 @@ class Dispatcher
                     $id++;
                 }
             }
-            echo '<h4>Liste des séries :</h4> <p>' . $series . '</p>';
+            echo '<h3>Liste des séries :</h3> <p>' . $series . '</p>';
         }
     }
 
