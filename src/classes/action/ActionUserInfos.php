@@ -8,8 +8,14 @@ class ActionUserInfos extends Action
 {
     public function execute(): string
     {
+        $user = unserialize($_SESSION['user']);
+
+        $user->infos[0]['prenom'] = $user->infos[0]['prenom'] ?? "";
+        $user->infos[0]['nom'] = $user->infos[0]['nom'] ?? "";
+        $user->infos[0]['pseudo'] = $user->infos[0]['pseudo'] ?? "";
+        $user->infos[0]['date_naissance'] = $user->infos[0]['date_naissance'] ?? "";
+
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $user = unserialize($_SESSION['user']);
             return <<<HTML
                     <h3>Vous pouvez modifier vos infos personnelles</h3></br>                                                    
                     <form method="post" action="?action=userinfos">
@@ -32,7 +38,6 @@ class ActionUserInfos extends Action
 
                 HTML;
         } else {
-            $user = unserialize($_SESSION['user']);
             $prenom = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
             $nom = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
             $pseudo = filter_var($_POST['pseudo'], FILTER_SANITIZE_STRING);

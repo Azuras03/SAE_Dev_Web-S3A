@@ -42,9 +42,11 @@ class ActionSignIn extends Action
                 $_SESSION['user'] = serialize($user);
 
                 return <<<HTML
-                    $email est connecté au service NetVOD <br>
-                    Vous pouvez modifier vos informations personnelles <a href="?action=userinfos">ici</a>
+                   <head>
+                        <meta http-equiv="refresh" content="0;URL=Index.php">
+                   </head>
                 HTML;
+
 
             } else {
                 return <<<HTML

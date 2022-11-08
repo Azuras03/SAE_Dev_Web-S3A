@@ -10,24 +10,16 @@ class ActionChangeTheme extends Action
     {
         if ($_SESSION['theme'] == 'colorBackgroundChangeLight') {
             $_SESSION['theme'] = 'colorBackgroundChangeDark';
-            Dispatcher::$themeChangesStyle .= '
-            p{
-                color: white;
-            }
-            
-            h3{
+            $_SESSION['CSSThemeChanges'] .= '
+            p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
                 color: white;
             }
             ';
 
         } else {
             $_SESSION['theme'] = 'colorBackgroundChangeLight';
-            Dispatcher::$themeChangesStyle .= '
-            p{
-                color: black;
-            }
-            
-            h3{
+            $_SESSION['CSSThemeChanges'] .= '
+            p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
                 color: black;
             }
             ';
