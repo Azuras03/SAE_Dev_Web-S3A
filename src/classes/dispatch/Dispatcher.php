@@ -57,6 +57,10 @@ class Dispatcher
                     $action = new \netvod\action\ActionDetailSerie();
                     $affichage .= $action->execute();
                     break;
+                case "saveseriefav" :
+                    $action = new \netvod\action\ActionSaveSeriePref();
+                    $affichage .= $action->execute();
+                    break;
             }
         }
 
