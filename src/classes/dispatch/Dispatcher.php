@@ -170,6 +170,7 @@ class Dispatcher
                 case "showfavserie" :
                     $action = new \netvod\action\ActionDisplayFavoriteSeries();
                     $affichage .= $action->execute();
+                    break;
                 case "progress-list" :
                     $action = new ActionDisplayListProgress();
                     $affichage .= $action->execute();
