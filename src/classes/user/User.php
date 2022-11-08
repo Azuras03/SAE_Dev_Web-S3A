@@ -38,6 +38,17 @@ class User
         return null;
     }
 
+    public static function insertAvis($commentaire, $note, $serie_id)
+    {
+        $db = ConnectionFactory::makeConnection();
+        $q = "UPDATE avis
+                SET note = ? AND commentaire = ?
+                WHERE id_user = ?
+                AND id_serie = ?";
+        $st = $db->prepare($q);
+        $st->execute([$note, $commentaire, unserialize($_SESSION['user'])->id, $serie_id]);
+    }
+
     /**
      * @throws NonEditablePropertyException
      */

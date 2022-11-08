@@ -10,7 +10,7 @@ class ActionSaveSeriePref extends Action
     public function execute(): string
     {
         $sql = "DELETE FROM `user2serie` WHERE id_user = ? AND id_serie = ?;";
-        $sql2 = "INSERT INTO user2serie VALUES (?, ?)";
+        $sql2 = "INSERT INTO `user2serie` VALUES (?, ?)";
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, unserialize($_SESSION['user'])->id);

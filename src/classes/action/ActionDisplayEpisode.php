@@ -2,8 +2,10 @@
 
 namespace netvod\action;
 
+use netvod\catalogue\Avis;
 use netvod\catalogue\Episode;
 use netvod\db\ConnectionFactory;
+use netvod\user\User;
 
 class ActionDisplayEpisode extends Action
 {
@@ -30,6 +32,23 @@ class ActionDisplayEpisode extends Action
         $renderer = new \netvod\render\RenderEpisode($episode);
         $user = unserialize($_SESSION["user"]);
         $user->addEpisodeInProgress($id);
-        return $renderer->render();
+
+        $form = "";
+        if ($_SERVER['REQUEST_METHOD'] == 'GET')
+            $form = <<<HTML
+            <form method="post" action="">
+                <label>Commentaire : </label>
+                <textarea name="commentaire" placeholder="<Ecrivez ici>"></textarea><br>
+                <label>Note : </label>
+                <input type="number" name="note" placeholder="<note>"><br>
+                <button type="submit">Envoyer</button>
+            </form>
+            HTML;
+        else
+        {
+            User::insertAvis($_POST["commentaire"], $_POST["note"], $id);
+        }
+
+        return $renderer->render() . $form;
     }
 }
