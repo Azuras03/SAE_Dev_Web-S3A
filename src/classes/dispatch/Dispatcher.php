@@ -88,7 +88,6 @@ class Dispatcher
             HTML;
         }
 
-        echo $_SESSION['theme'];
         $currTheme = $_SESSION['theme'];
 
         //Affichage du header
