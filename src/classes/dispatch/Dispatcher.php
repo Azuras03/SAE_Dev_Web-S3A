@@ -17,9 +17,25 @@ class Dispatcher
     public function run(): void
     {
         $affichage = "";
+        $connected = false;
         $currUser = 'invité';
         if (isset($_SESSION['user'])){
             $currUser = unserialize($_SESSION['user'])->email;
+            $connected = true;
+        }
+
+        if($connected){
+            $resultatConnexion = <<<HTML
+                <a href="Index.php" class="bouton">Accueil</a>
+                <a href="?action=signout" class="bouton">Se déconnecter</a>
+                <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
+            HTML;
+        }
+        else {
+            $resultatConnexion = <<<HTML
+                <a href="?action=signup" class="bouton">S'inscrire</a>
+                <a href="?action=signin" class="bouton">Se connecter</a>
+            HTML;
         }
 
         //Affichage du header
@@ -28,6 +44,11 @@ class Dispatcher
             body {
                 background-image: url("/images/background.png");
             }
+            
+            html{
+                font-family: 'Roboto', sans-serif;
+            }
+            
             .head {
                 background-color: rgb(120, 120, 120, 0.3);
             }
@@ -90,11 +111,7 @@ class Dispatcher
             <h1 class="bienvenue">Bienvenue sur le service de VOD netVOD</h1>
         
             <ul class="accueilPannel">
-                <a href="Index.php" class="bouton">Accueil</a>
-                <a href="?action=signup" class="bouton">S'inscrire</a>
-                <a href="?action=signin" class="bouton">Se connecter</a>
-                <a href="?action=signout" class="bouton">Se déconnecter</a>
-                <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
+                $resultatConnexion
             </ul>
         </div>
         HTML;
