@@ -29,9 +29,10 @@ class ActionDisplaySerie extends Action
         if ($stmt2->execute()) {
             while ($donneesEp = $stmt2->fetch()) {
                 $num = $donneesEp['numero'];
+                var_dump($num);
                 $titreEp = $donneesEp['titre'];
                 $dureeEp = $donneesEp['duree'];
-                $episode .= 'Épisode ' . $num . ' : </br> Titre : ' . $titreEp . '</br> Durée : ' . $dureeEp . ' minutes</br></br>';
+                $episode .= '<a href="?action=display-episode&serie=' . $_GET['serie'] . '&episode=' . $num . '">' .' Épisode ' . $num . ' : </a></br > Titre : ' . $titreEp . ' </br > Durée : ' . $dureeEp . ' minutes</br ></br >';
             }
         }
 
