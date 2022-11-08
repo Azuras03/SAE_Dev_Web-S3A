@@ -9,6 +9,7 @@ class Dispatcher
 {
 
     public ?string $action;
+    public static string $themeChangesStyle = "";
 
     public function __construct()
     {
@@ -93,6 +94,7 @@ class Dispatcher
         }
 
         $currTheme = $_SESSION['theme'];
+        $themeToChange = self::$themeChangesStyle;
 
         //Affichage du header
         $affichage .= <<<HTML
@@ -228,6 +230,8 @@ class Dispatcher
             width: 50%;
             }
           
+           $themeToChange
+          
         </style>
         <html>
         <body>
@@ -256,7 +260,8 @@ class Dispatcher
                     $series .= '<a href=' . $url . ' class="titreSerie">' . $donnees['titre'] . '</a><br>' . $minia . '</br>';
                 }
             }
-            echo '<h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p>';
+            echo '<h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p>
+';
         }
     }
 
