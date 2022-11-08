@@ -10,7 +10,7 @@ class ActionDisplayListProgress extends Action
 
     public function execute(): string
     {
-        $q = "SELECT * FROM userprogressepisode, episode, serie
+        $q = "SELECT serie_id, numero, episode.titre AS ep_titre FROM userprogressepisode, episode, serie
             WHERE userprogressepisode.id_episode = episode.id
             AND episode.serie_id = serie.id
             AND userprogressepisode.id_user = ?";
@@ -23,7 +23,7 @@ class ActionDisplayListProgress extends Action
         if ($st->execute()) {
             while ($donnees = $st->fetch()) {
                 $url = '?action=display-episode&serie=' . $donnees["serie_id"] . "&episode=" . $donnees["numero"];
-                $html .= '<li><a href=' . $url . '>' . $donnees['titre'] . '</a></li>';
+                $html .= '<li><a href=' . $url . '>' . $donnees['ep_titre'] . '</a></li>';
             }
         }
 
