@@ -212,6 +212,33 @@ class Dispatcher
                 text-align: right;
             }
             
+            .container{
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .rectangleSerie{
+                background-color: #006f8a;
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+                margin-bottom: 40px;
+                border : 10px solid #6eb4c5;
+                padding: 10px;
+                border-radius: 10px;
+                transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+            }
+            
+            .rectangleSerie:hover{
+                filter: brightness(1.2);
+                transform: scale(1.05);
+            }
+            
+            .rectangleSerie img{
+                border-radius: 20px;
+            }
+            
             #titreEpisode {
                 color: black;
                 text-align: center;
@@ -284,11 +311,10 @@ class Dispatcher
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
                     $url = '?action=display-serie&serie=' . $donnees["id"];
-                    $series .= '<a href=' . $url . ' class="titreSerie">' . $donnees['titre'] . '</a><br>' . $minia . '</br>';
+                    $series .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
                 }
             }
-            echo '<h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p>
-';
+            echo '<div class = "container"><h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p></div>';
         }
     }
 
