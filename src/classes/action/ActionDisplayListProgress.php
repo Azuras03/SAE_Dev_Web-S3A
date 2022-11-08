@@ -27,7 +27,7 @@ class ActionDisplayListProgress extends Action
             }
         }
 
-        return '<h4>Liste de vos séries en cours 🕰️ :</h4> <p>'.$html.'</ul></p>';
+        return '<h3>Liste de vos séries en cours 🕰️ :</h3> <p>'.$html.'</ul></p>';
 
 
     }

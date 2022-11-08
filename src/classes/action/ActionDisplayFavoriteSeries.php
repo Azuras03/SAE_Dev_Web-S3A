@@ -22,6 +22,6 @@ class ActionDisplayFavoriteSeries extends Action
             }
         }
 
-        return '<h4>Liste de vos séries préférées ⭐ :</h4> <p>'.$seriesPref.'</p>';
+        return '<h3>Liste de vos séries préférées ⭐ :</h3> <p>'.$seriesPref.'</p>';
     }
 }
