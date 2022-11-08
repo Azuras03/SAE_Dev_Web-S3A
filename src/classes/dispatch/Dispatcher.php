@@ -162,6 +162,11 @@ class Dispatcher
             background-color: rgb(120, 120, 120, 0.3);
             margin: 0 0 0 0;
             }
+            
+            video {
+            padding: 5% 25% 5% 25%;
+            width: 50%;
+            }
           
         </style>
         <html>
