@@ -21,6 +21,53 @@ class Dispatcher
         $affichage = "";
         $connected = false;
         $currUser = 'invité';
+
+        $affichage2 = "";
+        //Affichage du contenu
+        if (isset($_GET['action'])) {
+            switch ($_GET['action']) {
+                case "signin" :
+                    $action = new \netvod\action\ActionSignIn();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "userinfos" :
+                    $action = new \netvod\action\ActionUserInfos();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "signup" :
+                    $action = new \netvod\action\ActionSignUp();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "display-episode" :
+                    $action = new \netvod\action\ActionDisplayEpisode();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "display-serie" :
+                    $action = new \netvod\action\ActionDisplaySerie();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "saveseriefav" :
+                    $action = new \netvod\action\ActionSaveSeriePref();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "showfavserie" :
+                    $action = new \netvod\action\ActionDisplayFavoriteSeries();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "progress-list" :
+                    $action = new ActionDisplayListProgress();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "chgtheme" :
+                    $action = new ActionChangeTheme();
+                    $affichage2 .= $action->execute();
+                case "signout" :
+                    $action = new \netvod\action\ActionSignOut();
+                    $affichage2 .= $action->execute();
+                    break;
+            }
+        }
+
         if (isset($_SESSION['user'])) {
             $currUser = unserialize($_SESSION['user'])->email;
             $connected = true;
@@ -195,52 +242,7 @@ class Dispatcher
                 $resultatConnexion
             </ul>
         </div>
-        HTML;
-
-        //Affichage du contenu
-        if (isset($_GET['action'])) {
-            switch ($_GET['action']) {
-                case "signin" :
-                    $action = new \netvod\action\ActionSignIn();
-                    $affichage .= $action->execute();
-                    break;
-                case "userinfos" :
-                    $action = new \netvod\action\ActionUserInfos();
-                    $affichage .= $action->execute();
-                    break;
-                case "signup" :
-                    $action = new \netvod\action\ActionSignUp();
-                    $affichage .= $action->execute();
-                    break;
-                case "display-episode" :
-                    $action = new \netvod\action\ActionDisplayEpisode();
-                    $affichage .= $action->execute();
-                    break;
-                case "display-serie" :
-                    $action = new \netvod\action\ActionDisplaySerie();
-                    $affichage .= $action->execute();
-                    break;
-                case "saveseriefav" :
-                    $action = new \netvod\action\ActionSaveSeriePref();
-                    $affichage .= $action->execute();
-                    break;
-                case "showfavserie" :
-                    $action = new \netvod\action\ActionDisplayFavoriteSeries();
-                    $affichage .= $action->execute();
-                    break;
-                case "progress-list" :
-                    $action = new ActionDisplayListProgress();
-                    $affichage .= $action->execute();
-                    break;
-                case "chgtheme" :
-                    $action = new ActionChangeTheme();
-                    $affichage .= $action->execute();
-                case "signout" :
-                    $action = new \netvod\action\ActionSignOut();
-                    $affichage .= $action->execute();
-                    break;
-            }
-        }
+        HTML . $affichage2;
 
         $this->renderPage($affichage);
 
