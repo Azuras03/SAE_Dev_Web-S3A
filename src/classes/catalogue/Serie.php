@@ -34,6 +34,7 @@ class Serie
 
         return <<<HTML
             <p>Détails de la série $titre :</p>
+            <a href="Index.php?action=saveseriefav&id=$idSerie">⭐</a>
             <p>$detail</p>
             <p>Descriptif : $desc</p>
 
