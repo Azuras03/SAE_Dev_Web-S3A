@@ -7,10 +7,12 @@ class ActionDisplayEpisode extends Action
 
     public function execute(): string
     {
+        $html = "";
         $episode = unserialize($_SESSION['episode']);
         $user = $_SESSION["user"];
         $renderer = new \netvod\render\RenderEpisode($episode);
         $user->addEpisodeInProgress();
-        return $renderer->render();
+        $html .= $renderer->render();
+        return $html;
     }
 }
