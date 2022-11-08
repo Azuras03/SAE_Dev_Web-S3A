@@ -39,7 +39,7 @@ class Episode
                 $num = $donneesEp['numero'];
                 $titreEp = $donneesEp['titre'];
                 $dureeEp = $donneesEp['duree'];
-                $episode .= '<li>Épisode ' . $num . ' : </br> Titre : ' . $titreEp . '</br> Durée : ' . $dureeEp . ' minutes</br></br></li>';
+                $episode .= '<li><a href="?action=display-episode&serie=' . $_GET['serie'] . '&episode=' . $num . '">' .' Épisode ' . $num . ' : </a></br > Titre : ' . $titreEp . ' </br > Durée : ' . $dureeEp . ' minutes</br ></br></li>';
             }
         }
 
