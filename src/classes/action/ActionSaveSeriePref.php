@@ -21,11 +21,11 @@ class ActionSaveSeriePref extends Action
         try{
             $stmt->execute();
             $stmt2->execute();
-            if($stmt->rowCount() != 0) return 'La série est déjà dans vos préférences 🟠';
+            if($stmt->rowCount() != 0) return '<p>La série est déjà dans vos préférences 🟠</p>';
         }
         catch (\PDOException $e){
-            return "Une erreur est survenue 🔴";
+            return "<p>Une erreur est survenue 🔴</p>";
         }
-        return "Insertion réussie 🟢";
+        return "<p>Insertion réussie 🟢</p>";
     }
 }
