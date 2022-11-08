@@ -45,10 +45,28 @@ class Dispatcher
                 background-image: url("/images/background.png");
             }
             
+            @keyframes opacityIntro {
+                0%{
+                    filter: opacity(0%);
+                }
+                25%{
+                    filter: opacity(0%);
+                }
+                100%{
+                    filter: opacity(100%);
+                }
+            }
             html{
+                font-family: "Arial",sans-serif;
+                animation-name: opacityIntro;
+                animation-direction: normal;
+                animation-iteration-count: 1;
+                animation-duration: 2s;
+                transition: 1s all cubic-bezier(0, 0, 0, 1);
+                width: 100%;
+                background-color: #eaf1ff;
                 font-family: 'Roboto', sans-serif;
             }
-            
             .head {
                 background-color: rgb(120, 120, 120, 0.3);
             }
