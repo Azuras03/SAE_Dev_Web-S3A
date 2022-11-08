@@ -12,15 +12,21 @@ class ActionSignUp extends Action
 
     public function execute(): string
     {
-        $html = "<h3 class='inscription'>Inscription</h3>";
+        $html = "<h3>Inscription</h3>";
         if ($this->http_method == 'GET') {
             $html .=  <<<HTML
             <form method="post" action="?action=signup">
-            <label>Email : </label>
-            <input type="email" name="email" placeholder="<email>"><br>
-            <label>Mot de passe : </label>
-            <input type="password" name="password" placeholder="<password>"><br>
-            <button type="submit">S'inscrire</button>
+                <table class="miseenforme">
+                    <tr>
+                        <th><label>Email : </label></th>
+                        <th><label>Mot de passe : </label></th>
+                    </tr>
+                    <tr>                   
+                        <th><input type="email" name="email" placeholder="<email>"><br></th>
+                        <th><input type="password" name="password" placeholder="<password>"><br></th>
+                        <th><button type="submit">S'inscrire</button></th>
+                    </tr>
+                </table>
             </form>
             HTML;
         } else {

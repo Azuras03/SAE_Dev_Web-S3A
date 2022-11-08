@@ -11,17 +11,23 @@ class ActionUserInfos extends Action
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $user = unserialize($_SESSION['user']);
             return <<<HTML
-                    Vous pouvez modifier vos infos personnelles </br>                                    
+                    <h3>Vous pouvez modifier vos infos personnelles</h3></br>                                                    
                     <form method="post" action="?action=userinfos">
-                    <label>Prénom : </label>
-                    <input type="text" name="prenom" value="{$user->infos[0]['prenom']}"><br>
-                    <label>Nom : </label>
-                    <input type="text" name="nom" value="{$user->infos[0]['nom']}"><br>
-                    <label>Pseudo : </label>
-                    <input type="text" name="pseudo" value="{$user->infos[0]['pseudo']}"><br>
-                    <label>Date de naissance</label>
-                    <input type="date" name="date_naissance" value="{$user->infos[0]['date_naissance']}"><br>
-                    <button type="submit">Modifier</button>
+                        <table class="miseenforme">
+                            <tr>
+                                <th><label>Prénom</label></th>
+                                <th><label>Nom</label></th>
+                                <th><label>Pseudo</label></th>
+                                <th><label>Date de naissance</label></th>                       
+                            </tr>
+                            <tr>
+                                <th><input type="text" name="prenom" value="{$user->infos[0]['prenom']}"><br></th>
+                                <th><input type="text" name="nom" value="{$user->infos[0]['nom']}"><br></th>
+                                <th><input type="text" name="pseudo" value="{$user->infos[0]['pseudo']}"><br></th>
+                                <th><input type="date" name="date_naissance" value="{$user->infos[0]['date_naissance']}"><br></th>
+                                <th><button type="submit">Modifier</button></th>
+                            </tr>                                        
+                        </table>
                     </form>                   
 
                 HTML;

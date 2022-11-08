@@ -13,13 +13,20 @@ class ActionSignIn extends Action
     {
         if ($this->http_method == 'GET') {
             return <<<HTML
+            <h3>Connexion</h3>
             <form method="post" action="?action=signin">
-            <label>Email : </label>
-            <input type="email" name="email" placeholder="<email>"><br>
-            <label>Password : </label>
-            <input type="password" name="password" placeholder="<password>"><br>
-            <button type="submit">Se Connecter</button>
-            </form>
+                <table class="miseenforme">
+                    <tr>
+                        <th><label>Email : </label></th>
+                        <th><label>Mot de passe : </label></th>  
+                    </tr>
+                    <tr>                        
+                        <th><input type="email" name="email" placeholder="<email>"><br></th>
+                        <th><input type="password" name="password" placeholder="<password>"><br></th>
+                        <th><button type="submit">Se Connecter</button></th>
+                    </tr>  
+                </table>         
+            </form>           
             HTML;
         } else {
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
