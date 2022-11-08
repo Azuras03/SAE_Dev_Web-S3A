@@ -69,7 +69,6 @@ class User
         $st->bindParam(2, $epId);
         $st->execute();
 
-        echo $this->id . "<br>" . $ep;
         if ($st->fetch(\PDO::FETCH_ASSOC)) return false;
         return true;
     }
