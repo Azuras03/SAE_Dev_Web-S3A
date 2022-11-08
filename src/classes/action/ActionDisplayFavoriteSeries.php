@@ -18,10 +18,10 @@ class ActionDisplayFavoriteSeries extends Action
             while ($donnees = $addSerie->fetch()) {
                 $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
                 $url = '?action=display-serie&serie=' . $donnees["id_serie"];
-                $seriesPref .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
+                $seriesPref .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
             }
         }
 
-        return '<h3>Liste de vos séries préférées ⭐ :</h3> <p>'.$seriesPref.'</p>';
+        return '<div class = "container"><h3>Liste de vos séries préférées ⭐ :</h3> <p class="listeSerie">'.$seriesPref.'</p></div>';
     }
 }
