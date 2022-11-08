@@ -118,7 +118,7 @@ class Dispatcher
                     filter: opacity(100%);
                 }
             }
-            
+
             @keyframes colorBackgroundChangeLight {
                 0%{
                     background-color: #ffffff;
@@ -136,7 +136,7 @@ class Dispatcher
                     background-color: #0c0c0c;
                 }
             }
-            
+
             html{
                 animation-name: opacityIntro;
                 animation-direction: normal;
@@ -186,6 +186,7 @@ class Dispatcher
             .connection {
                 padding-top: 10px;
                 padding-left: 10px;
+                text-align: center;
             }
             
             .nomcompte {
@@ -237,9 +238,24 @@ class Dispatcher
             }
             
             video {
-            padding: 0 25% 5% 25%;
-            width: 50%;
+                padding: 0 25% 5% 25%;
+                width: 50%;
             }
+            
+            .miseenforme {
+                background-color: #b6b6b6;
+                justify-self: center;
+                border: solid 2px black;
+                margin: auto;
+            }   
+            
+            th {
+                padding: 5px 10px 5px 10px;
+            }
+            
+            .connexionUser {
+                background-color: black;
+            }          
           
            $themeToChange
           
