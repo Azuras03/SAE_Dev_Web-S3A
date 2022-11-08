@@ -2,6 +2,8 @@
 
 namespace netvod\catalogue;
 
+use netvod\db\ConnectionFactory;
+
 class Episode
 {
     public int $id;
@@ -23,6 +25,26 @@ class Episode
         $this->serie_id = $serie_id;
     }
 
+    public static function displayDataEpisode ()
+    {
+        $idSerie = $_GET['serie'];
+        $db = ConnectionFactory::makeConnection();
+
+        $stmt2 = $db->prepare('SELECT numero, titre, duree FROM episode WHERE serie_id = ?');
+        $stmt2->bindParam(1, $idSerie);
+        $episode = "<ul>";
+
+        if ($stmt2->execute()) {
+            while ($donneesEp = $stmt2->fetch()) {
+                $num = $donneesEp['numero'];
+                $titreEp = $donneesEp['titre'];
+                $dureeEp = $donneesEp['duree'];
+                $episode .= '<li>Épisode ' . $num . ' : </br> Titre : ' . $titreEp . '</br> Durée : ' . $dureeEp . ' minutes</br></br></li>';
+            }
+        }
+
+        return "$episode</ul>";
+    }
 
 
 }

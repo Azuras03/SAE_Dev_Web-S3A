@@ -2,8 +2,8 @@
 
 namespace netvod\auth;
 
-use iutnc\deefy\exception\AlreadyStoredException;
-use iutnc\deefy\exception\PasswordStrenghException;
+use netvod\exception\AlreadyStoredException;
+use netvod\exception\PasswordStrenghException;
 use netvod\db\ConnectionFactory;
 use netvod\exception\InvalidPropertyNameException;
 use netvod\user\User;
@@ -14,7 +14,7 @@ class Authentification
     public static function authenticate($email, $psswrd)
     {
         $db = ConnectionFactory::makeConnection();
-        $stmt = $db->prepare('SELECT * FROM user WHERE email = ?');
+        $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
 
         if ($stmt->execute([$email])) {
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);

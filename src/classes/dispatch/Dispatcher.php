@@ -53,8 +53,8 @@ class Dispatcher
                     $action = new \netvod\action\ActionDisplayEpisode();
                     $affichage .= $action->execute();
                     break;
-                case "detail" :
-                    $action = new \netvod\action\ActionDetailSerie();
+                case "display-serie" :
+                    $action = new \netvod\action\ActionDisplaySerie();
                     $affichage .= $action->execute();
                     break;
             }
@@ -62,7 +62,7 @@ class Dispatcher
 
         $this->renderPage($affichage);
 
-        if(isset($_SESSION['user'])){
+        if(isset($_SESSION['user']) && !isset($_GET['action'])){
             $db = ConnectionFactory::makeConnection();
 
             $addSerie = $db->prepare("SELECT titre, img FROM serie");
@@ -71,7 +71,7 @@ class Dispatcher
             if ($addSerie->execute()) {
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                    $url = '?action=detail&id=' . $id;
+                    $url = '?action=display-serie&serie=' . $id;
                     $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
                     $id++;
                 }
