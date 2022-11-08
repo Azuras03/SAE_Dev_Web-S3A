@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy\exception;
+namespace netvod\exception;
 
 use Exception;
 
