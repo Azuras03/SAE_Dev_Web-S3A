@@ -95,6 +95,15 @@ class Dispatcher
                 text-align: center;
                 padding-top: 10px;
             }
+            
+            .titreSerie {
+                text-decoration: none;
+                color: #34BBE2;
+            }
+            
+            .listSerie {
+                text-align: right;
+            }
           
         </style>
         <div class="head">
@@ -151,10 +160,10 @@ class Dispatcher
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
                     $url = '?action=display-serie&serie=' . $donnees["id"];
-                    $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
+                    $series .= '<a href=' . $url . ' class="titreSerie">' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
                 }
             }
-            echo '<h3>Liste des séries :</h3> <p>' . $series . '</p>';
+            echo '<h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p>';
         }
     }
 
