@@ -2,6 +2,8 @@
 
 namespace netvod\dispatch;
 
+use netvod\action\ActionDisplayFavoriteSeries;
+use netvod\action\ActionSaveSeriePref;
 use netvod\db\ConnectionFactory;
 
 class Dispatcher
@@ -31,6 +33,8 @@ class Dispatcher
         <li><a href="Index.php">Accueil</a></li>
         <li><a href="?action=signup">S'inscrire</a></li>
         <li><a href="?action=signin">Se connecter</a></li>
+        <li><a href="?action=signout">Se déconnecter</a></li>
+        <li><a href="?action=showfavserie">Vos titres préférés ⭐</a></li>
         </ul>
         HTML;
 
@@ -61,6 +65,9 @@ class Dispatcher
                     $action = new \netvod\action\ActionSaveSeriePref();
                     $affichage .= $action->execute();
                     break;
+                case "showfavserie" :
+                    $action = new \netvod\action\ActionDisplayFavoriteSeries();
+                    $affichage .= $action->execute();
             }
         }
 
@@ -69,15 +76,13 @@ class Dispatcher
         if(isset($_SESSION['user']) && !isset($_GET['action'])){
             $db = ConnectionFactory::makeConnection();
 
-            $addSerie = $db->prepare("SELECT titre, img FROM serie");
+            $addSerie = $db->prepare("SELECT titre, img, id FROM serie");
             $series = "";
-            $id = 1;
             if ($addSerie->execute()) {
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                    $url = '?action=display-serie&serie=' . $id;
+                    $url = '?action=display-serie&serie=' . $donnees["id"];
                     $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
-                    $id++;
                 }
             }
             echo '<h4>Liste des séries :</h4> <p>'.$series.'</p>';
