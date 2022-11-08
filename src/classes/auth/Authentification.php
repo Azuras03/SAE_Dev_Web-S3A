@@ -14,7 +14,7 @@ class Authentification
     public static function authenticate($email, $psswrd)
     {
         $db = ConnectionFactory::makeConnection();
-        $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
+        $stmt = $db->prepare('SELECT * FROM user WHERE email = ?');
 
         if ($stmt->execute([$email])) {
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -42,7 +42,7 @@ class Authentification
             throw new InvalidPropertyNameException("Email invalide");
 
         $db = ConnectionFactory::makeConnection();
-        $q1 = "SELECT email FROM User WHERE email = ?";
+        $q1 = "SELECT email FROM user WHERE email = ?";
         $st = $db->prepare($q1);
 
         $st->execute([$email]);
@@ -53,7 +53,7 @@ class Authentification
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $q2 = "INSERT INTO User (email, passwd, role) VALUES (?, ?, ?)";
+        $q2 = "INSERT INTO user (email, passwd, role) VALUES (?, ?, ?)";
         $st2 = $db->prepare($q2);
         $st2->execute([$email, $hash, 1]);
 
