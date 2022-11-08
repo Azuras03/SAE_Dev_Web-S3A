@@ -49,7 +49,6 @@ class User
     {
         if (!isset($_GET["episode"])) return false;
         $epId = $_GET["episode"];
-        echo "<h1>blo</h1>";
         $db = ConnectionFactory::makeConnection();
         $q = "SELECT id_user, id_episode FROM `userprogressepisode` 
                 WHERE id_user = ?
