@@ -5,6 +5,8 @@ namespace netvod\user;
 use iutnc\deefy\exception\AlreadyStoredException;
 use netvod\auth\Authentification;
 use netvod\db\ConnectionFactory;
+use netvod\exception\InvalidPropertyNameException;
+use netvod\exception\InvalidPropertyValueException;
 use netvod\exception\NonEditablePropertyException;
 
 class User
@@ -36,6 +38,9 @@ class User
         return null;
     }
 
+    /**
+     * @throws NonEditablePropertyException
+     */
     public function __set(string $at, mixed $value): void
     {
         if (property_exists($this, $at)) {
@@ -45,26 +50,33 @@ class User
         }
     }
 
-    public function isAddEpisodeInProgress () : bool
+    /**
+     * @throws InvalidPropertyValueException
+     */
+    public function isAddEpisodeInProgress (string $epId) : bool
     {
-        if (!isset($_GET["episode"])) return false;
-        $epId = $_GET["episode"];
+        /*
+        if (!isset($_SESSION["episode"])) throw new InvalidPropertyValueException("\$_SESSION[\"episode\"]", "Inexistant");
+        $ep = unserialize($_SESSION["episode"]);
+
+*/
         $db = ConnectionFactory::makeConnection();
         $q = "SELECT id_user, id_episode FROM `userprogressepisode` 
                 WHERE id_user = ?
-                AND id_episode = ?;";
+                AND id_episode = ?";
         $st = $db->prepare($q);
         $st->bindParam(1, $this->id);
         $st->bindParam(2, $epId);
         $st->execute();
 
+        echo $this->id . "<br>" . $ep;
         if ($st->fetch(\PDO::FETCH_ASSOC)) return false;
         return true;
     }
 
-    public function addEpisodeInProgress ()
+    public function addEpisodeInProgress (string $id)
     {
-        if (!$this->isAddEpisodeInProgress()) return;
+        if (!$this->isAddEpisodeInProgress($id)) return;
 
         $db = ConnectionFactory::makeConnection();
         $idepisode = $db->prepare("SELECT id FROM episode WHERE serie_id = ? AND numero = ?;");
