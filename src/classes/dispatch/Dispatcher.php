@@ -217,6 +217,10 @@ class Dispatcher
                     $action = new ActionDisplayListProgress();
                     $affichage .= $action->execute();
                     break;
+                case "signout" :
+                    $action = new \netvod\action\ActionSignOut();
+                    $affichage .= $action->execute();
+                    break;
             }
         }
 
