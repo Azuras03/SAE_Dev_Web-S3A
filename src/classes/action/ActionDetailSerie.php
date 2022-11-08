@@ -38,6 +38,7 @@ class ActionDetailSerie extends Action
         return <<<HTML
 
             <p>Détails de la série $titre :</p>
+            <a href="Index.php?action=saveseriefav&id=$idSerie">⭐</a>
             <p>$detail</br>
             Descriptif : $desc</p>
 
