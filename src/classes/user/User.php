@@ -25,7 +25,7 @@ class User
 
     public static function userById(string $email){
         $db = ConnectionFactory::makeConnection();
-        $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
+        $stmt = $db->prepare('SELECT * FROM user WHERE email = ?');
         if ($stmt->execute([$email])) {
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
             if ($user) {
@@ -68,7 +68,7 @@ class User
         if (!$this->isAddEpisodeInProgress()) return;
 
         $db = ConnectionFactory::makeConnection();
-        $idepisode = $db->prepare("SELECT id FROM Episode WHERE serie_id = ? AND numero = ?;");
+        $idepisode = $db->prepare("SELECT id FROM episode WHERE serie_id = ? AND numero = ?;");
         $idepisode->bindParam(1, $_GET["serie"]);
         $idepisode->bindParam(2, $_GET["episode"]);
         $idepisode->execute();
