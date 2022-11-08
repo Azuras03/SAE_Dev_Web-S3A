@@ -28,8 +28,8 @@ class ActionDisplayEpisode extends Action
             $episode = new Episode($id, $numero, $titre, $resume, $file, $duree, $idSerie);
         }
         $renderer = new \netvod\render\RenderEpisode($episode);
-//        $user = $_SESSION["user"];
-//        $user->addEpisodeInProgress();
+        $user = unserialize($_SESSION["user"]);
+        $user->addEpisodeInProgress();
         return $renderer->render();
     }
 }

@@ -47,16 +47,16 @@ class User
 
     public function isAddEpisodeInProgress () : bool
     {
-        if (!isset($_SESSION["episode"])) return false;
-        $episode = unserialize($_SESSION["episode"]);
-
+        if (!isset($_GET["episode"])) return false;
+        $epId = $_GET["episode"];
+        echo "<h1>blo</h1>";
         $db = ConnectionFactory::makeConnection();
         $q = "SELECT id_user, id_episode FROM `userprogressepisode` 
                 WHERE id_user = ?
                 AND id_episode = ?;";
         $st = $db->prepare($q);
         $st->bindParam(1, $this->id);
-        $st->bindParam(2, $episode->id);
+        $st->bindParam(2, $epId);
         $st->execute();
 
         if ($st->fetch(\PDO::FETCH_ASSOC)) return false;

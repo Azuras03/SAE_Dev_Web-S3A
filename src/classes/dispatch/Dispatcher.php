@@ -235,6 +235,10 @@ class Dispatcher
                 case "chgtheme" :
                     $action = new ActionChangeTheme();
                     $affichage .= $action->execute();
+                case "signout" :
+                    $action = new \netvod\action\ActionSignOut();
+                    $affichage .= $action->execute();
+                    break;
             }
         }
 
