@@ -2,6 +2,7 @@
 
 namespace netvod\dispatch;
 
+use netvod\action\ActionDisplayListProgress;
 use netvod\db\ConnectionFactory;
 
 class Dispatcher
@@ -29,6 +30,7 @@ class Dispatcher
                 <a href="Index.php" class="bouton">Accueil</a>
                 <a href="?action=signout" class="bouton">Se déconnecter</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
+                <a href="?action=progress-list" class="bouton">Vos épisodes en cours 🕰️</a>
             HTML;
         } else {
             $resultatConnexion = <<<HTML
@@ -204,6 +206,11 @@ class Dispatcher
                 case "showfavserie" :
                     $action = new \netvod\action\ActionDisplayFavoriteSeries();
                     $affichage .= $action->execute();
+                    break;
+                case "progress-list" :
+                    $action = new ActionDisplayListProgress();
+                    $affichage .= $action->execute();
+                    break;
             }
         }
 
