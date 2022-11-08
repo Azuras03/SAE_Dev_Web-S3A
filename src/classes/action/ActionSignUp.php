@@ -12,7 +12,7 @@ class ActionSignUp extends Action
 
     public function execute(): string
     {
-        $html = "<h3>Inscription</h3>";
+        $html = "<h3 class='inscription'>Inscription</h3>";
         if ($this->http_method == 'GET') {
             $html .=  <<<HTML
             <form method="post" action="?action=signup">

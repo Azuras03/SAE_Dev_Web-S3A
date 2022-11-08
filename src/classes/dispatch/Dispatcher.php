@@ -2,8 +2,6 @@
 
 namespace netvod\dispatch;
 
-use netvod\action\ActionDisplayFavoriteSeries;
-use netvod\action\ActionSaveSeriePref;
 use netvod\db\ConnectionFactory;
 
 class Dispatcher
@@ -26,16 +24,67 @@ class Dispatcher
 
         //Affichage du header
         $affichage .= <<<HTML
-        <p>Vous êtes connecté en tant que <b>$currUser</b></p>
-        <h1>Bienvenue sur le service de VOD netVOD</h1>
+        <style>
+            body {
+                background-image: url("/images/background.png");
+            }
+            .head {
+                background-color: rgb(120, 120, 120, 0.3);
+            }
+            .bienvenue {
+                color: #34BBE2;
+                text-align: center;
+            }
+            
+            .accueilPannel {
+                text-align: center;
+                padding-top: 20px;              
+            }
+            
+            .bouton {
+                text-decoration: none;
+                color: white;
+                background-color: black;
+                border: solid 7px #34BBE2;
+                padding: 7px 7px 7px 7px;
+                margin: 0px 20px 0px 20px;
+            }
+            
+            .bouton:hover {
+                color: black;
+                background-color: white;
+            }
+            
+            .connection {
+                padding-top: 10px;
+                padding-left: 10px;
+            }
+            
+            .nomcompte {
+                color: red;
+            }
+            
+            .inscription {
+                color: green;
+            }
+            
+            h3 {
+                color: black;
+                text-align: center;
+                padding-top: 10px;
+            }
+          
+        </style>
+        <div class="head">
+            <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
+            <h1 class="bienvenue">Bienvenue sur le service de VOD netVOD</h1>
         
-        <ul>
-        <li><a href="Index.php">Accueil</a></li>
-        <li><a href="?action=signup">S'inscrire</a></li>
-        <li><a href="?action=signin">Se connecter</a></li>
-        <li><a href="?action=signout">Se déconnecter</a></li>
-        <li><a href="?action=showfavserie">Vos titres préférés ⭐</a></li>
-        </ul>
+            <ul class="accueilPannel">
+                <a href="Index.php" class="bouton">Accueil</a>
+                <a href="?action=signup" class="bouton">S'inscrire</a>
+                <a href="?action=signin" class="bouton">Se connecter</a>
+            </ul>
+        </div>
         HTML;
 
         //Affichage du contenu
@@ -85,7 +134,7 @@ class Dispatcher
                     $series .= '<a href=' . $url . '>' . $donnees['titre'] . '</a><br>'. $minia .'</br>';
                 }
             }
-            echo '<h4>Liste des séries :</h4> <p>'.$series.'</p>';
+            echo '<h3>Liste des séries :</h3> <p>' . $series . '</p>';
         }
     }
 
@@ -94,7 +143,8 @@ class Dispatcher
      * @param string $html
      * @return void
      */
-    private function renderPage(string $html) : void {
+    private function renderPage(string $html): void
+    {
         echo $html;
     }
 
