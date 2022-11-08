@@ -19,7 +19,7 @@ class Serie
 
     public static function displaySerie (): string
     {
-        $idSerie = $_GET['id'];
+        $idSerie = $_GET['serie'];
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT titre, descriptif, annee, date_ajout FROM serie WHERE id = ?');
         $stmt->bindParam(1, $idSerie);

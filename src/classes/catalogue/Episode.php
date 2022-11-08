@@ -27,7 +27,7 @@ class Episode
 
     public static function displayEpisode ()
     {
-        $idSerie = $_GET['id'];
+        $idSerie = $_GET['serie'];
         $db = ConnectionFactory::makeConnection();
 
         $stmt2 = $db->prepare('SELECT numero, titre, duree FROM episode WHERE serie_id = ?');
