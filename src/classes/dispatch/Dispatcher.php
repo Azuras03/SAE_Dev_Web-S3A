@@ -62,7 +62,7 @@ class Dispatcher
 
         $this->renderPage($affichage);
 
-        if(isset($_SESSION['user'])){
+        if(isset($_SESSION['user']) && !isset($_GET['action'])){
             $db = ConnectionFactory::makeConnection();
 
             $addSerie = $db->prepare("SELECT titre, img FROM serie");
