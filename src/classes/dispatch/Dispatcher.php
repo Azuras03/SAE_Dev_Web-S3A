@@ -74,6 +74,10 @@ class Dispatcher
             $connected = true;
         }
 
+        if (!isset($_SESSION['theme'])) {
+            $_SESSION['theme'] = 'colorBackgroundChangeLight';
+        }
+
         if ($connected) {
             $resultatConnexion = <<<HTML
                 <a href="Index.php" class="bouton">Accueil</a>
