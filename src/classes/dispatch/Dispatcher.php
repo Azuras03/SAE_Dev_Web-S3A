@@ -66,6 +66,9 @@ class Dispatcher
                 width: 100%;
                 background-color: #eaf1ff;
                 font-family: 'Roboto', sans-serif;
+                background-image: url("images/backgroundAnim.gif");
+                background-repeat: no-repeat;
+                background-size: cover;
             }
             .head {
                 background-color: rgb(120, 120, 120, 0.3);
@@ -79,7 +82,6 @@ class Dispatcher
                 text-align: center;
                 padding-top: 20px;              
             }
-            
             .bouton {
                 text-decoration: none;
                 color: white;
@@ -124,6 +126,8 @@ class Dispatcher
             }
           
         </style>
+        <html>
+        <body>
         <div class="head">
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
             <h1 class="bienvenue">Bienvenue sur le service de VOD netVOD</h1>
@@ -192,7 +196,6 @@ class Dispatcher
      */
     private function renderPage(string $html): void
     {
-        echo $html;
+        echo $html . '</body></html>';
     }
-
 }
