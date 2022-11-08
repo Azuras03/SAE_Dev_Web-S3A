@@ -219,12 +219,6 @@ class Dispatcher
                 padding: 10px 0 10px 0;
             }
             
-            body {                
-            background-color: rgb(120, 120, 120, 0.3);
-            margin: 0 0 0 0;
-            padding: 10px 10px 10px 10px;
-            }
-            
             video {
             padding: 0 25% 5% 25%;
             width: 50%;
