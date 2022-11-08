@@ -12,7 +12,7 @@ class ActionDisplaySerie extends Action
     public function execute(): string
     {
         $html = Serie::displaySerie();
-        $html .= Episode::displayEpisode();
+        $html .= Episode::displayDataEpisode();
         return $html;
     }
 }

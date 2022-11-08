@@ -25,7 +25,7 @@ class Episode
         $this->serie_id = $serie_id;
     }
 
-    public static function displayEpisode ()
+    public static function displayDataEpisode ()
     {
         $idSerie = $_GET['serie'];
         $db = ConnectionFactory::makeConnection();
