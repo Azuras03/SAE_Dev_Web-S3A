@@ -48,6 +48,7 @@ class Dispatcher
                 border: solid 7px #34BBE2;
                 padding: 7px 7px 7px 7px;
                 margin: 0px 20px 0px 20px;
+                transition : all 0.5s ease-out;
             }
             
             .bouton:hover {
@@ -83,6 +84,8 @@ class Dispatcher
                 <a href="Index.php" class="bouton">Accueil</a>
                 <a href="?action=signup" class="bouton">S'inscrire</a>
                 <a href="?action=signin" class="bouton">Se connecter</a>
+                <a href="?action=signout" class="bouton">Se déconnecter</a>
+                <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
             </ul>
         </div>
         HTML;
