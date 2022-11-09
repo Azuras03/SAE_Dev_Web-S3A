@@ -71,6 +71,13 @@ class Dispatcher
                     $action = new \netvod\action\ActionActivateAccount();
                     $affichage2 .= $action->execute();
                     break;
+                case "emailpasswordreset":
+                    $action = new \netvod\action\ActionEmailPasswordReset();
+                    $affichage2 .= $action->execute();
+                    break;
+                    case "passwordreset":
+                    $action = new \netvod\action\ActionPasswordReset();
+                    $affichage2 .= $action->execute();
             }
         } else {
             $action = new \netvod\action\ActionDisplaySerie();
@@ -310,7 +317,27 @@ class Dispatcher
             
             .connexionUser {
                 background-color: black;
-            }          
+            }     
+            
+            .lettre {
+            margin: 0 30% 0 30%;
+            padding: 30px 30px 30px 30px;
+            background-color: lightgray;
+            }    
+            
+            #email {
+            text-align: right;
+            }
+            
+            #emailCorrespondants {
+            text-align: left;
+            background-color: grey;
+            border: solid 2px dimgray;
+            border-radius: 2px;
+            margin-bottom: 0;
+            }
+            
+             
           
            $themeToChange
           
