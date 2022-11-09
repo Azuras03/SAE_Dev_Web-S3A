@@ -36,11 +36,23 @@ class Serie
             $desc = $donnees['descriptif'];
         }
 
+        $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '&fav=ajout">⭐</a>';
+
+        $sql = 'SELECT * FROM user2serie WHERE id_serie = ? AND id_user = ?';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(1, $idSerie);
+        $stmt->bindParam(2, unserialize($_SESSION['user'])->id);
+        $stmt->execute();
+        if($stmt->rowCount() != 0) {
+            $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '">✴</a>';
+        }
+
         return <<<HTML
             <h3>$titre</h3>
             <a href="Index.php?action=saveseriefav&id=$idSerie">⭐ Enregistrer</a>
             <p>Note moyenne : $note | <a href="Index.php?action=review-list&id=$idSerie">Voir les commentaires</a></p>
             <p>$detail</p>
+            $fav
             <p>📃 Descriptif : $desc</p>
 
         HTML;

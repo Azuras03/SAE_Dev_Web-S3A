@@ -7,8 +7,8 @@ use netvod\action\ActionDisplayListProgress;
 class Dispatcher
 {
 
-    public ?string $action;
     public static string $themeChangesStyle = "";
+    public ?string $action;
 
     public function __construct()
     {
@@ -71,6 +71,17 @@ class Dispatcher
                     $action = new \netvod\action\ActionSignOut();
                     $affichage2 .= $action->execute();
                     break;
+                case"activateAccount":
+                    $action = new \netvod\action\ActionActivateAccount();
+                    $affichage2 .= $action->execute();
+                    break;
+                case "emailpasswordreset":
+                    $action = new \netvod\action\ActionEmailPasswordReset();
+                    $affichage2 .= $action->execute();
+                    break;
+                    case "passwordreset":
+                    $action = new \netvod\action\ActionPasswordReset();
+                    $affichage2 .= $action->execute();
             }
         } else {
             $action = new \netvod\action\ActionDisplaySerie();
@@ -89,16 +100,16 @@ class Dispatcher
 
         if ($connected) {
             $resultatConnexion = <<<HTML
-                <a href="?action=display-serie" class="bouton">Accueil</a>
-                <a href="?action=userinfos" class="bouton">Mes informations</a>
-                <a href="?action=signout" class="bouton">Se déconnecter</a>
+                <a href="?action=display-serie" class="bouton">Accueil 🏠</a>
+                <a href="?action=userinfos" class="bouton">Mes informations 📜</a>
+                <a href="?action=signout" class="bouton">Se déconnecter 🚪</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
                 <a href="?action=progress-list" class="bouton">Vos épisodes en cours 🕰️</a>
             HTML;
         } else {
             $resultatConnexion = <<<HTML
-                <a href="?action=signup" class="bouton">S'inscrire</a>
-                <a href="?action=signin" class="bouton">Se connecter</a>
+                <a href="?action=signup" class="bouton">S'inscrire 🆕</a>
+                <a href="?action=signin" class="bouton">Se connecter 🙍</a>
             HTML;
         }
 
@@ -140,6 +151,10 @@ class Dispatcher
                 100%{
                     background-color: #0c0c0c;
                 }
+            }
+            
+            .favoriteButton {
+                font-size: 3em;
             }
 
             html{
@@ -310,7 +325,46 @@ class Dispatcher
             
             .connexionUser {
                 background-color: black;
-            }          
+            }    
+            
+            .logo {
+                width: 200px;
+                height: 200px;
+                display: flex;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 10%;
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+                transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+                flex-grow: 1;
+            }
+            
+            .logo:hover {
+                box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.5);
+                transform : translateY(-5px) scale(1.02);
+            }
+            
+            .lettre {
+            margin: 0 30% 0 30%;
+            padding: 30px 30px 30px 30px;
+            background-color: lightgray;
+            }    
+            
+            #email {
+            text-align: right;
+            }
+            
+            #emailCorrespondants {
+            text-align: left;
+            background-color: grey;
+            border: solid 2px dimgray;
+            border-radius: 2px;
+            margin-bottom: 0;
+            }
+            
+             
           
            $themeToChange
           
@@ -319,10 +373,10 @@ class Dispatcher
         <body>
         <div class="head">
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
-            <h1>Bienvenue sur le service de VOD netVOD</h1>
+            <img src="images/logo.png" class="logo">
         
             <ul class="accueilPannel">
-                <a href="?action=chgtheme" class="bouton" id="theme">Change Theme</a>
+                <a href="?action=chgtheme" class="bouton" id="theme">Change Theme ♦</a>
                 $resultatConnexion
             </ul>
         </div>

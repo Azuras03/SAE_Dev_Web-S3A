@@ -3,9 +3,11 @@
 namespace netvod\action;
 
 use netvod\auth\Authentification;
+use netvod\db\ConnectionFactory;
 use netvod\exception\AlreadyStoredException;
 use netvod\exception\InvalidPropertyNameException;
 use netvod\exception\PasswordStrenghException;
+use netvod\user\User;
 
 class ActionSignUp extends Action
 {
@@ -41,14 +43,18 @@ class ActionSignUp extends Action
             } else {
                 try {
                     Authentification::register($mail, $pwd);
-
-                    $html .= "<p><strong>" . $mail .
-                        " a été enregistré. Vous pouvez maintenant vous connecter</strong></p>";
+                    $token = Authentification::generateToken($mail);
+                    $db = ConnectionFactory::makeConnection();
+                    $st = $db->prepare("UPDATE user set activation_token = '$token' where email = ?");
+                    $st->execute([$mail]);
+                    $html .= "<p><strong>" . $mail . " a été enregistré. Vous pouvez confirmer votre inscription en cliquant <a href='?action=activateAccount&token=$token'>ici</a></strong></p>";
                 }
                 catch (PasswordStrenghException | AlreadyStoredException | InvalidPropertyNameException $e)
                 {
                     $html .= $e->getMessage();
                 }
+                $user = User::userByEmail($mail);
+                $_SESSION['user'] = serialize($user);
             }
         }
         return $html;

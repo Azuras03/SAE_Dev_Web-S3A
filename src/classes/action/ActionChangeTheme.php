@@ -14,6 +14,14 @@ class ActionChangeTheme extends Action
             p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
                 color: white;
             }
+            
+            .logo{
+                filter : invert(100%);
+            }
+            
+            .logo:hover{
+                filter : invert(90%);
+            }
             ';
 
         } else {
@@ -22,8 +30,20 @@ class ActionChangeTheme extends Action
             p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
                 color: black;
             }
+            
+            .logo{
+                filter : invert(0%);
+            }
+            
+            .logo:hover{
+                filter : invert(10%);
+            }
             ';
         }
-        return '<p>Changé 🟢</p>';
+        return '
+        <head>
+            <meta http-equiv="refresh" content="0;URL=Index.php">
+        </head>
+        <p>Changé 🟢</p>';
     }
 }
