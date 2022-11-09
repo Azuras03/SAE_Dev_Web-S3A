@@ -24,6 +24,7 @@ class Serie
         $idSerie = $_GET['serie'];
         if ($note = self::getMoySerie($idSerie) == 0)
             $note = "Pas assez de données";
+        else $note .= "/5";
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT titre, descriptif, annee, date_ajout FROM serie WHERE id = ?');
 
@@ -36,9 +37,9 @@ class Serie
         }
 
         return <<<HTML
-            <p>Détails de la série $titre :</p>
+            <h3>$titre</h3>
             <a href="Index.php?action=saveseriefav&id=$idSerie">⭐ Enregistrer</a>
-            <p>Note moyenne : $note</p>
+            <p>Note moyenne : $note | <a href="Index.php?action=review-list&id=$idSerie">Voir les commentaires</a></p>
             <p>$detail</p>
             <p>📃 Descriptif : $desc</p>
 

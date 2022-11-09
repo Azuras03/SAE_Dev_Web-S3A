@@ -59,6 +59,10 @@ class Dispatcher
                     $action = new ActionDisplayListProgress();
                     $affichage2 .= $action->execute();
                     break;
+                case 'review-list':
+                    $action = new \netvod\action\ActionDisplayReviews();
+                    $affichage2 .= $action->execute();
+                    break;
                 case "chgtheme" :
                     $action = new \netvod\action\ActionChangeTheme();
                     $affichage2 .= $action->execute();

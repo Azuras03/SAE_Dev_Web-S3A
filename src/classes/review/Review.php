@@ -2,11 +2,28 @@
 
 namespace netvod\user;
 
+use netvod\db\ConnectionFactory;
+
 class Review
 {
-    public static function displayComments()
+    public static function displayComments(int $serId)
     {
+        $db = ConnectionFactory::makeConnection();
+        $q = "SELECT email, note, comment FROM `avis`, user
+                WHERE avis.id_user = user.id
+                AND id_serie = ?";
+        $st = $db->prepare($q);
+        $st->execute([$serId]);
 
+        $html = "";
+        foreach ($st->fetchAll(\PDO::FETCH_ASSOC) as $data) {
+            $html .= <<<HTML
+                    <article>
+                        <h4>$data->email</h4>
+                    </article>
+                    HTML;
+        }
+        return $html;
     }
 
     public static function displayReviewForm(int $serId): string
@@ -15,7 +32,7 @@ class Review
         $comment = "";
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!($code = User::insertAvis($_POST["commentaire"], $_POST["note"], $serId)))
-                $comment .= "<small>La note doit être comprise entre 0 et 5 ! 🔴</small>";
+                $comment .= "<small>La note doit être comprise entre 1 et 5 ! 🔴</small>";
             else if ($code == 1)
                 $comment .= "<small>Avis ajouté 🟢</small>";
             else if ($code == 2)

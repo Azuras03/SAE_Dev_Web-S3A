@@ -9,13 +9,16 @@ use netvod\db\ConnectionFactory;
 use netvod\user\Review;
 use netvod\user\User;
 
-class ActionDisplayEpisode extends Action
+class ActionDisplayReviews extends Action
 {
 
     public function execute(): string
     {
         $idEpisode = $_GET['episode'];
         $idSerie = $_GET['serie'];
+
+        Review::displayComments($idSerie);
+        /*
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT * FROM episode WHERE serie_id = ? AND numero = ?');
         $stmt->bindParam(1, $idSerie);
@@ -39,5 +42,6 @@ class ActionDisplayEpisode extends Action
 
         $comment = Review::displayReviewForm($serId);
         return $renderer->render() . $comment;
+        */
     }
 }
