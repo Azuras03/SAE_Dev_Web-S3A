@@ -310,7 +310,14 @@ class Dispatcher
             
             .connexionUser {
                 background-color: black;
-            }          
+            }    
+            .logo {
+                width: 200px;
+                height: 200px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }      
           
            $themeToChange
           
@@ -319,7 +326,7 @@ class Dispatcher
         <body>
         <div class="head">
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
-            <h1>Bienvenue sur le service de VOD netVOD</h1>
+            <img src="images/logo.png" class="logo">
         
             <ul class="accueilPannel">
                 <a href="?action=chgtheme" class="bouton" id="theme">Change Theme</a>
