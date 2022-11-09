@@ -16,7 +16,7 @@ class Review
         $st = $db->prepare($q);
         $st->execute([$serId]);
 
-        $html = "<h3>Tous les avis</h3>";
+        $html = "<h4>Tous les avis</h4>";
         foreach ($st as $data) {
             $html .= <<<HTML
                     <article>
@@ -32,9 +32,9 @@ class Review
     public static function displayReviewForm(int $serId): string
     {
 
-        $comment = "";
+        $comment = "<h4>Ajouter un avis</h4>";
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (!($code = User::insertAvis($_POST["commentaire"], $_POST["note"], $serId)))
+            if (!($code = self::insertReview($_POST["commentaire"], $_POST["note"], $serId)))
                 $comment .= "<small>La note doit être comprise entre 1 et 5 ! 🔴</small>";
             else if ($code == 1)
                 $comment .= "<small>Avis ajouté 🟢</small>";
@@ -53,6 +53,38 @@ class Review
         HTML;
 
         return $comment;
+    }
+
+    public static function insertReview($commentaire, $note, $serie_id) : int|bool
+    {
+        $db = ConnectionFactory::makeConnection();
+        $commentaire = filter_var($commentaire, FILTER_SANITIZE_SPECIAL_CHARS);
+        $note = filter_var($note, FILTER_SANITIZE_NUMBER_INT);
+
+        if ($note < 0 || $note > 5) return false;
+
+        $q = "SELECT count(*) FROM avis WHERE id_user = ? AND id_serie = ?";
+        $st = $db->prepare($q);
+        $st->execute([unserialize($_SESSION['user'])->id, $serie_id]);
+        $data = $st->fetch();
+
+        if ($data[0] > 0)
+        {
+            $q = "UPDATE avis
+                SET note = ?, comment = ?
+                WHERE id_user = ?
+                AND id_serie = ?";
+            $st = $db->prepare($q);
+            $st->execute([$note, $commentaire, unserialize($_SESSION['user'])->id, $serie_id]);
+            return 2;
+        }
+        else
+        {
+            $q = "INSERT INTO avis(id_user, id_serie, note, comment) VALUES (?,?,?,?)";
+            $st = $db->prepare($q);
+            $st->execute([unserialize($_SESSION['user'])->id, $serie_id, $note, $commentaire]);
+            return 1;
+        }
     }
 
 

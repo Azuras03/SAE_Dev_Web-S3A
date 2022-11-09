@@ -5,6 +5,7 @@ namespace netvod\action;
 use netvod\catalogue\Episode;
 use netvod\catalogue\Serie;
 use netvod\db\ConnectionFactory;
+use netvod\review\Review;
 
 class ActionDisplaySerie extends Action
 {
@@ -14,6 +15,7 @@ class ActionDisplaySerie extends Action
         if (isset($_GET['serie'])) {
             $html = Serie::displaySerie();
             $html .= Episode::displayDataEpisode();
+            $html .= Review::displayReviewForm($_GET['serie']);
             return $html;
         } else {
             if (isset($_SESSION['user'])) {

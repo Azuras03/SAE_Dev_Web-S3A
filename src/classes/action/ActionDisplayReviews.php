@@ -15,6 +15,6 @@ class ActionDisplayReviews extends Action
     public function execute(): string
     {
         $idSerie = $_GET['id'];
-        return Review::displayComments($idSerie);
+        return "<h3>Avis pour cette série</h3>" . Review::displayReviewForm($idSerie) . Review::displayComments($idSerie);
     }
 }
