@@ -50,26 +50,25 @@ class User
         $st = $db->prepare($q);
         $st->execute([unserialize($_SESSION['user'])->id, $serie_id]);
         $data = $st->fetch();
+        echo $serie_id;
 
-        if ($data[0] = 0)
-        {
-            $q = "INSERT INTO avis(id_user, id_serie, note, comment) VALUES (?,?,?,?)";
-            $st = $db->prepare($q);
-            $st->execute([unserialize($_SESSION['user'])->id, $serie_id, $note, $commentaire]);
-            return 1;
-        }
-        else
+        if ($data[0] > 0)
         {
             $q = "UPDATE avis
-                SET note = ? AND comment = ?
+                SET note = ?, comment = ?
                 WHERE id_user = ?
                 AND id_serie = ?";
             $st = $db->prepare($q);
             $st->execute([$note, $commentaire, unserialize($_SESSION['user'])->id, $serie_id]);
             return 2;
         }
-
-
+        else
+        {
+            $q = "INSERT INTO avis(id_user, id_serie, note, comment) VALUES (?,?,?,?)";
+            $st = $db->prepare($q);
+            $st->execute([unserialize($_SESSION['user'])->id, $serie_id, $note, $commentaire]);
+            return 1;
+        }
     }
 
     /**
