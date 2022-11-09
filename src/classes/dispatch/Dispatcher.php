@@ -3,7 +3,6 @@
 namespace netvod\dispatch;
 
 use netvod\action\ActionDisplayListProgress;
-use netvod\db\ConnectionFactory;
 
 class Dispatcher
 {
@@ -21,8 +20,8 @@ class Dispatcher
         $affichage = "";
         $connected = false;
         $currUser = 'invité';
-        if(!isset($_SESSION['CSSThemeChanges']))
-        $_SESSION['CSSThemeChanges'] = '';
+        if (!isset($_SESSION['CSSThemeChanges']))
+            $_SESSION['CSSThemeChanges'] = '';
 
         $affichage2 = "";
         //Affichage du contenu
@@ -69,8 +68,10 @@ class Dispatcher
                     $affichage2 .= $action->execute();
                     break;
             }
+        } else {
+            $action = new \netvod\action\ActionDisplaySerie();
+            $affichage2 .= $action->execute();
         }
-
 
 
         if (isset($_SESSION['user'])) {
@@ -84,7 +85,7 @@ class Dispatcher
 
         if ($connected) {
             $resultatConnexion = <<<HTML
-                <a href="Index.php" class="bouton">Accueil</a>
+                <a href="?action=display-serie" class="bouton">Accueil</a>
                 <a href="?action=userinfos" class="bouton">Mes informations</a>
                 <a href="?action=signout" class="bouton">Se déconnecter</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
@@ -325,20 +326,7 @@ class Dispatcher
 
         $this->renderPage($affichage);
 
-        if (isset($_SESSION['user']) && !isset($_GET['action'])) {
-            $db = ConnectionFactory::makeConnection();
 
-            $addSerie = $db->prepare("SELECT titre, img, id FROM serie");
-            $series = "";
-            if ($addSerie->execute()) {
-                while ($donnees = $addSerie->fetch()) {
-                    $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                    $url = '?action=display-serie&serie=' . $donnees["id"];
-                    $series .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
-                }
-            }
-            echo '<div class = "container"><h3>Liste des séries :</h3> <p class="listeSerie">' . $series . '</p></div>';
-        }
     }
 
     /**
