@@ -51,7 +51,7 @@ class ActionDisplaySerie extends Action
                         $query = "";
                         switch ($_POST['trierSerie']) {
                             case 'titre':
-                                ("SELECT titre, img, id FROM serie ORDER BY titre");
+                                $query = "SELECT titre, img, id FROM serie ORDER BY titre";
                                 break;
                             case 'annee':
                                 $query = "SELECT titre, img, id FROM serie ORDER BY annee";
