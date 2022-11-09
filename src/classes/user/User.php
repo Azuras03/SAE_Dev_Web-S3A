@@ -50,9 +50,6 @@ class User
         }
     }
 
-    /**
-     * @throws InvalidPropertyValueException
-     */
     public function isAddEpisodeInProgress (string $epId) : bool
     {
         $db = ConnectionFactory::makeConnection();
@@ -68,7 +65,7 @@ class User
         return true;
     }
 
-    public function addEpisodeInProgress (string $id)
+    public function addEpisodeInProgress (string $id): void
     {
         if (!$this->isAddEpisodeInProgress($id)) return;
 
