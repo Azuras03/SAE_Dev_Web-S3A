@@ -6,7 +6,7 @@ use netvod\catalogue\Avis;
 use netvod\catalogue\Episode;
 use netvod\catalogue\Serie;
 use netvod\db\ConnectionFactory;
-use netvod\user\Review;
+use netvod\review\Review;
 use netvod\user\User;
 
 class ActionDisplayEpisode extends Action

@@ -1,12 +1,13 @@
 <?php
 
-namespace netvod\user;
+namespace netvod\review;
 
 use netvod\db\ConnectionFactory;
+use netvod\user\User;
 
 class Review
 {
-    public static function displayComments(int $serId)
+    public static function displayComments(int $serId) : string
     {
         $db = ConnectionFactory::makeConnection();
         $q = "SELECT email, note, comment FROM `avis`, user
@@ -15,11 +16,13 @@ class Review
         $st = $db->prepare($q);
         $st->execute([$serId]);
 
-        $html = "";
-        foreach ($st->fetchAll(\PDO::FETCH_ASSOC) as $data) {
+        $html = "<h3>Tous les avis</h3>";
+        foreach ($st as $data) {
             $html .= <<<HTML
                     <article>
-                        <h4>$data->email</h4>
+                        <small> <b>{$data['email']}</b> ({$data['note']}/5) a écrit :</small>
+                        <p></p>
+                        <p>{$data['comment']}</p>
                     </article>
                     HTML;
         }

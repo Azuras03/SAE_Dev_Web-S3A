@@ -6,7 +6,7 @@ use netvod\catalogue\Avis;
 use netvod\catalogue\Episode;
 use netvod\catalogue\Serie;
 use netvod\db\ConnectionFactory;
-use netvod\user\Review;
+use netvod\review\Review;
 use netvod\user\User;
 
 class ActionDisplayReviews extends Action
@@ -14,10 +14,9 @@ class ActionDisplayReviews extends Action
 
     public function execute(): string
     {
-        $idEpisode = $_GET['episode'];
-        $idSerie = $_GET['serie'];
+        $idSerie = $_GET['id'];
 
-        Review::displayComments($idSerie);
+        return Review::displayComments($idSerie);
         /*
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT * FROM episode WHERE serie_id = ? AND numero = ?');
