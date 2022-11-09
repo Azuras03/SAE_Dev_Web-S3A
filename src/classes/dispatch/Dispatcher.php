@@ -148,6 +148,10 @@ class Dispatcher
                     background-color: #0c0c0c;
                 }
             }
+            
+            .favoriteButton {
+                font-size: 3em;
+            }
 
             html{
                 animation-name: opacityIntro;

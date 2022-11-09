@@ -9,6 +9,7 @@ class ActionSaveSeriePref extends Action
 
     public function execute(): string
     {
+        $res = "<p>Série retirée 🟢</p>";
         $sql = "DELETE FROM `user2serie` WHERE id_user = ? AND id_serie = ?;";
         $sql2 = "INSERT INTO `user2serie` VALUES (?, ?)";
         $db = ConnectionFactory::makeConnection();
@@ -20,12 +21,14 @@ class ActionSaveSeriePref extends Action
         $stmt2->bindParam(2, $this->id_serie);
         try{
             $stmt->execute();
-            $stmt2->execute();
-            if($stmt->rowCount() != 0) return '<p>La série est déjà dans vos préférences 🟠</p>';
+            if(isset($_GET['fav'])){
+                $stmt2->execute();
+                $res = "<p>Série ajoutée 🟢</p>";
+            }
         }
         catch (\PDOException $e){
             return "<p>Une erreur est survenue 🔴</p>";
         }
-        return "<p>Insertion réussie 🟢</p>";
+        return $res;
     }
 }
