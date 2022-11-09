@@ -40,6 +40,10 @@ class ActionChangeTheme extends Action
             }
             ';
         }
-        return '<p>Changé 🟢</p>';
+        return '
+        <head>
+            <meta http-equiv="refresh" content="0;URL=Index.php">
+        </head>
+        <p>Changé 🟢</p>';
     }
 }
