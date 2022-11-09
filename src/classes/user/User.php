@@ -50,7 +50,6 @@ class User
         $st = $db->prepare($q);
         $st->execute([unserialize($_SESSION['user'])->id, $serie_id]);
         $data = $st->fetch();
-        echo $serie_id;
 
         if ($data[0] > 0)
         {
