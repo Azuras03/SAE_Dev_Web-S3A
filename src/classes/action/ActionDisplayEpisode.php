@@ -40,7 +40,7 @@ class ActionDisplayEpisode extends Action
                 <label>Commentaire : </label>
                 <textarea name="commentaire" placeholder="<Ecrivez ici>"></textarea><br>
                 <label>Note : </label>
-                <input type="number" name="note" placeholder="<note>"><br>
+                <input type="number" name="note" placeholder="<note>" min="0" max="5"><br>
                 <button type="submit">Envoyer</button>
             </form>
             HTML;
