@@ -97,10 +97,10 @@ class Dispatcher
         if ($connected) {
             $resultatConnexion = <<<HTML
                 <a href="?action=display-serie" class="bouton">Accueil 🏠</a>
-                <a href="?action=userinfos" class="bouton">Mes informations 📜</a>
-                <a href="?action=signout" class="bouton">Se déconnecter 🚪</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
                 <a href="?action=progress-list" class="bouton">Vos épisodes en cours 🕰️</a>
+                <a href="?action=userinfos" class="bouton">Mes informations 📜</a>
+                <a href="?action=signout" class="bouton">Se déconnecter 🚪</a>
             HTML;
         } else {
             $resultatConnexion = <<<HTML
