@@ -18,6 +18,7 @@ class ActionDisplayFavoriteSeries extends Action
             if ($addSerie->rowCount() == 0) {
                 $seriesPref =  "<p>Vous n'avez pas de série préférée... Pour l'instant 😉</p>";
             } else {
+                $seriesPref .= '<p>Nombre de séries : ' . $addSerie->rowCount() . '</p>';
                 while ($donnees = $addSerie->fetch()) {
                     $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
                     $url = '?action=display-serie&serie=' . $donnees["id_serie"];
