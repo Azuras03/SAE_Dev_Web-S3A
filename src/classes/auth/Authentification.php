@@ -73,13 +73,13 @@ class Authentification
     public static function generateToken(string $email): string
     {
         $bytes = random_bytes(10);
-        $token = bin2hex($bytes);
-        $db = ConnectionFactory::makeConnection();
-        $st = $db->prepare("UPDATE user set activation_token = '$token' where email = ?");
-        $st->execute([$email]);
-        return $token;
+        return bin2hex($bytes);
     }
 
+    public static function userByToken(string $token)
+    {
+
+    }
 
 
 }

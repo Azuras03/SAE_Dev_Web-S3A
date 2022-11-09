@@ -24,7 +24,10 @@ class ActionSignIn extends Action
                         <th><input type="email" name="email" placeholder="<email>"><br></th>
                         <th><input type="password" name="password" placeholder="<password>"><br></th>
                         <th><button type="submit">Se Connecter</button></th>
-                    </tr>  
+                    </tr>
+                    <tr>
+                        <th><a href="?action=emailpasswordreset" style="color: #0c0c0c">Mot de passe oublié ?</p></th>
+                    </tr>
                 </table>         
             </form>           
             HTML;

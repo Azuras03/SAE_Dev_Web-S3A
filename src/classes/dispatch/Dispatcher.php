@@ -71,6 +71,13 @@ class Dispatcher
                     $action = new \netvod\action\ActionActivateAccount();
                     $affichage2 .= $action->execute();
                     break;
+                case "emailpasswordreset":
+                    $action = new \netvod\action\ActionEmailPasswordReset();
+                    $affichage2 .= $action->execute();
+                    break;
+                    case "passwordreset":
+                    $action = new \netvod\action\ActionPasswordReset();
+                    $affichage2 .= $action->execute();
             }
         } else {
             $action = new \netvod\action\ActionDisplaySerie();
@@ -311,13 +318,34 @@ class Dispatcher
             .connexionUser {
                 background-color: black;
             }    
+            
             .logo {
                 width: 200px;
                 height: 200px;
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-            }      
+            }     
+            
+            .lettre {
+            margin: 0 30% 0 30%;
+            padding: 30px 30px 30px 30px;
+            background-color: lightgray;
+            }    
+            
+            #email {
+            text-align: right;
+            }
+            
+            #emailCorrespondants {
+            text-align: left;
+            background-color: grey;
+            border: solid 2px dimgray;
+            border-radius: 2px;
+            margin-bottom: 0;
+            }
+            
+             
           
            $themeToChange
           
@@ -326,7 +354,7 @@ class Dispatcher
         <body>
         <div class="head">
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
-            <img src="images/logo.png" class="logo">
+            <h1>Bienvenue sur le service de VOD netVOD</h1>
         
             <ul class="accueilPannel">
                 <a href="?action=chgtheme" class="bouton" id="theme">Change Theme</a>
