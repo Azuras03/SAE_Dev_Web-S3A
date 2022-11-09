@@ -17,6 +17,7 @@ class ActionDisplayListProgress extends Action
 
         $db = ConnectionFactory::makeConnection();
         $html = "<ul>";
+        $init = "<ul></ul>";
 
         $st = $db->prepare($q);
         $st->bindParam(1, unserialize($_SESSION['user'])->id);
@@ -25,9 +26,11 @@ class ActionDisplayListProgress extends Action
                 $url = '?action=display-episode&serie=' . $donnees["serie_id"] . "&episode=" . $donnees["numero"];
                 $html .= '<li><a href=' . $url . '>' . $donnees['ep_titre'] . '</a></li>';
             }
+            $html .= "</ul>";
         }
+        if ($init === $html) $html = "Commencez à regarder des épisodes et ils s'afficheront ici !";
 
-        return '<h3>Liste de vos épisodes en cours 🕰️ :</h3> <p>'.$html.'</ul></p>';
+        return '<div class = "container"><h3>Liste de vos épisodes en cours 🕰️ :</h3> <p class="listeSerie">'.$html.'</p></div>';
 
 
     }
