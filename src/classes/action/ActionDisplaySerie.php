@@ -50,6 +50,9 @@ class ActionDisplaySerie extends Action
                             case 'nbepisodes':
                                 $query = "SELECT serie.titre, serie.img, serie.id, COUNT(*) FROM serie INNER JOIN episode ON serie.id = episode.serie_id GROUP BY serie.titre, serie.img, serie.id ORDER BY COUNT(*)";
                                 break;
+                            case 'note':
+                                $query = "SELECT titre, img, id FROM serie ORDER BY note_moy";
+                                break;
                             default:
                                 $query = "SELECT titre, img, id FROM serie";
                                 break;
@@ -71,10 +74,11 @@ class ActionDisplaySerie extends Action
                             <option value="annee">Année</option>
                             <option value="titre">Titre</option>
                             <option value="nbepisodes">NbEp</option>
+                            <option value="note">Note</option>
                         </select>
                         <select name="triCrDr" id="triCrDr" >
                             <option value="ASC">🔺</option>
-                            <option value="DESC">🔻</option>
+                            <option selected value="DESC">🔻</option>
                         </select>
                         <button>🔎</button>
                     </form>
