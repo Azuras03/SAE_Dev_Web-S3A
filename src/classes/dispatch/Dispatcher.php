@@ -159,7 +159,9 @@ class Dispatcher
             
             .accueilPannel {
                 text-align: center;
-                padding-top: 20px;              
+                padding-top: 20px;   
+                display: flex;    
+                justify-content: center;       
             }
             
             a {
@@ -175,12 +177,33 @@ class Dispatcher
                 border: solid 7px #34BBE2;
                 padding: 7px 7px 7px 7px;
                 margin: 0px 20px 0px 20px;
-                transition : all 0.5s ease-out;
+                transition: all 0.5s cubic-bezier(0, 0, 0, 1);
             }
             
             .bouton:hover {
                 color: black;
-                background-color: white;
+                background-color: #34BBE2;
+                transform: scale(1.08);
+                border-color: #e6f4ff;
+                box-shadow: 0 0 10px #34BBE2;
+                border-radius: 10px;
+            }
+            
+            .bouton:active {
+                filter: blur(4px);
+                transform: scale(0.8);
+            }
+            
+            #theme {
+                color: #8b99f5;
+                border: solid 7px #2f1c9d;
+            }
+            
+            #theme:hover {
+                color: white;
+                background-color: #2f1c9d;
+                box-shadow: 0 0 10px #3442e2;
+                border-color: #e6f4ff;
             }
             
             .connection {
@@ -294,7 +317,7 @@ class Dispatcher
             <h1>Bienvenue sur le service de VOD netVOD</h1>
         
             <ul class="accueilPannel">
-                <a href="?action=chgtheme" class="bouton">Change Theme</a>
+                <a href="?action=chgtheme" class="bouton" id="theme">Change Theme</a>
                 $resultatConnexion
             </ul>
         </div>
