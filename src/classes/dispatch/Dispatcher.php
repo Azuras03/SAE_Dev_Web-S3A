@@ -96,16 +96,16 @@ class Dispatcher
 
         if ($connected) {
             $resultatConnexion = <<<HTML
-                <a href="?action=display-serie" class="bouton">Accueil</a>
-                <a href="?action=userinfos" class="bouton">Mes informations</a>
-                <a href="?action=signout" class="bouton">Se déconnecter</a>
+                <a href="?action=display-serie" class="bouton">Accueil 🏠</a>
+                <a href="?action=userinfos" class="bouton">Mes informations 📜</a>
+                <a href="?action=signout" class="bouton">Se déconnecter 🚪</a>
                 <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
                 <a href="?action=progress-list" class="bouton">Vos épisodes en cours 🕰️</a>
             HTML;
         } else {
             $resultatConnexion = <<<HTML
-                <a href="?action=signup" class="bouton">S'inscrire</a>
-                <a href="?action=signin" class="bouton">Se connecter</a>
+                <a href="?action=signup" class="bouton">S'inscrire 🆕</a>
+                <a href="?action=signin" class="bouton">Se connecter 🙍</a>
             HTML;
         }
 
@@ -372,7 +372,7 @@ class Dispatcher
             <img src="images/logo.png" class="logo">
         
             <ul class="accueilPannel">
-                <a href="?action=chgtheme" class="bouton" id="theme">Change Theme</a>
+                <a href="?action=chgtheme" class="bouton" id="theme">Change Theme ♦</a>
                 $resultatConnexion
             </ul>
         </div>
