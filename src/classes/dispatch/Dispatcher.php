@@ -8,8 +8,8 @@ use netvod\db\ConnectionFactory;
 class Dispatcher
 {
 
-    public ?string $action;
     public static string $themeChangesStyle = "";
+    public ?string $action;
 
     public function __construct()
     {
@@ -21,8 +21,8 @@ class Dispatcher
         $affichage = "";
         $connected = false;
         $currUser = 'invité';
-        if(!isset($_SESSION['CSSThemeChanges']))
-        $_SESSION['CSSThemeChanges'] = '';
+        if (!isset($_SESSION['CSSThemeChanges']))
+            $_SESSION['CSSThemeChanges'] = '';
 
         $affichage2 = "";
         //Affichage du contenu
@@ -68,9 +68,12 @@ class Dispatcher
                     $action = new \netvod\action\ActionSignOut();
                     $affichage2 .= $action->execute();
                     break;
+                case"activateAccount":
+                    $action = new \netvod\action\ActionActivateAccount();
+                    $affichage2 .= $action->execute();
+                    break;
             }
         }
-
 
 
         if (isset($_SESSION['user'])) {

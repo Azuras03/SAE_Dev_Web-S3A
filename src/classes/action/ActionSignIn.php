@@ -32,7 +32,7 @@ class ActionSignIn extends Action
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
             $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
             if (Authentification::authenticate($email, $password)) {
-                $user = User::userById($email);
+                $user = User::userByEmail($email);
                 $db = ConnectionFactory::makeConnection();
                 $stmt = $db->prepare('SELECT * FROM userinfo WHERE id_user = ?');
                 if ($stmt->execute([$user->id])) {

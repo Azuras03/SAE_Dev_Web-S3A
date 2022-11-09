@@ -25,7 +25,7 @@ class User
         $this->infos = $infos;
     }
 
-    public static function userById(string $email){
+    public static function userByEmail(string $email){
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT * FROM user WHERE email = ?');
         if ($stmt->execute([$email])) {
