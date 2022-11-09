@@ -2,10 +2,10 @@
 
 namespace netvod\action;
 
-use iutnc\deefy\exception\AlreadyStoredException;
-use iutnc\deefy\exception\PasswordStrenghException;
 use netvod\auth\Authentification;
+use netvod\exception\AlreadyStoredException;
 use netvod\exception\InvalidPropertyNameException;
+use netvod\exception\PasswordStrenghException;
 
 class ActionSignUp extends Action
 {
@@ -20,10 +20,12 @@ class ActionSignUp extends Action
                     <tr>
                         <th><label>Email : </label></th>
                         <th><label>Mot de passe : </label></th>
+                        <th><label>Confirmer Mot de passe :</label></th>
                     </tr>
                     <tr>                   
                         <th><input type="email" name="email" placeholder="<email>"><br></th>
                         <th><input type="password" name="password" placeholder="<password>"><br></th>
+                        <th><input type="password" name="confirm" placeholder="<password>"><br></th>
                         <th><button type="submit">S'inscrire</button></th>
                     </tr>
                 </table>
@@ -32,16 +34,21 @@ class ActionSignUp extends Action
         } else {
             $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $pwd = filter_var($_POST['password'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $confirm = filter_var($_POST['confirm'], FILTER_SANITIZE_SPECIAL_CHARS);
 
-            try {
-                Authentification::register($mail, $pwd);
+            if (!($pwd == $confirm)){
+                $html .= "<p>Les mots de passes ne sont pas identiques</p>";
+            } else {
+                try {
+                    Authentification::register($mail, $pwd);
 
-                $html .= "<p><strong>" . $mail .
-                    " a été enregistré. Vous pouvez maintenant vous connecter</strong></p>";
-            }
-            catch (PasswordStrenghException | AlreadyStoredException | InvalidPropertyNameException $e)
-            {
-                $html .= $e->getMessage();
+                    $html .= "<p><strong>" . $mail .
+                        " a été enregistré. Vous pouvez maintenant vous connecter</strong></p>";
+                }
+                catch (PasswordStrenghException | AlreadyStoredException | InvalidPropertyNameException $e)
+                {
+                    $html .= $e->getMessage();
+                }
             }
         }
         return $html;
