@@ -118,35 +118,34 @@ class Dispatcher
 
         //Affichage du header
         $affichage .= <<<HTML
-        <!doctype html>
-        <html lang="fr">
-        <head>
-        <meta charset="UTF-8">
-                     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                     <title>NetVOD</title>
-                     <link rel="stylesheet" href="src/style/main.css">
-                     <style>
-                     html {
-                            animation-name: opacityIntro;
-                            animation-direction: normal;
-                            animation-iteration-count: 1;
-                            animation-duration: 2s;
-                            transition: 1s all cubic-bezier(0, 0, 0, 1);
-                            width: 100%;
-                            font-family: 'Roboto', sans-serif;
-                            animation: $currTheme 1s infinite alternate-reverse;
-                            background-color: rgb(120, 120, 120, 0.3);
-                            margin: 0 0 0 0;
-                        }     
-                       $themeToChange
-                    </style>
+         <!doctype html>
+         <html lang="fr">
+         <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+         <title>NetVOD</title>
+         <link rel="stylesheet" href="src/style/main.css">
+         <style>
+         html {
+                animation-name: opacityIntro;
+                animation-direction: normal;
+                animation-iteration-count: 1;
+                animation-duration: 2s;
+                transition: 1s all cubic-bezier(0, 0, 0, 1);
+                width: 100%;
+                font-family: 'Roboto', sans-serif;
+                animation: $currTheme 1s infinite alternate-reverse;
+                background-color: rgb(120, 120, 120, 0.3);
+                margin: 0 0 0 0;
+            }     
+           $themeToChange
+        </style>
         </head>        
-        <html>
         <body>
         <div class="head">
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
-            <img src="images/logo.png" class="logo">
+            <img src="images/logo.png" class="logo" alt="Logo NetVod">
         
             <ul class="accueilPannel">
                 <a href="?action=chgtheme" class="bouton" id="theme">Change Theme ♦</a>
