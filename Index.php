@@ -11,5 +11,5 @@ ConnectionFactory::setConfig('./db.config.ini');
 
 
 //Affichage
-$dispatcher = new Dispatcher();
-$dispatcher->run();
+$page = new \netvod\render\RenderPage();
+$page->render();
