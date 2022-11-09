@@ -22,9 +22,10 @@ class Serie
     public static function displaySerie (): string
     {
         $idSerie = $_GET['serie'];
-        if ($note = self::getMoySerie($idSerie) == 0)
-            $note = "Pas assez de données";
-        else $note .= "/5";
+        if ($note = self::getMoySerie($idSerie) != 0)
+            $note .= "/5";
+        else $note = "Pas assez de données";
+
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT titre, descriptif, annee, date_ajout FROM serie WHERE id = ?');
 
@@ -36,8 +37,6 @@ class Serie
             $desc = $donnees['descriptif'];
         }
 
-        $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '&fav=ajout">⭐</a>';
-
         $sql = 'SELECT * FROM user2serie WHERE id_serie = ? AND id_user = ?';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $idSerie);
@@ -46,13 +45,13 @@ class Serie
         if($stmt->rowCount() != 0) {
             $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '">✴</a>';
         }
+        else $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '&fav=ajout">⭐</a>';
 
         return <<<HTML
-            <h3>$titre</h3>
-            <a href="Index.php?action=saveseriefav&id=$idSerie">⭐ Enregistrer</a>
-            <p>Note moyenne : $note | <a href="Index.php?action=review-list&id=$idSerie">Voir les commentaires</a></p>
+            <h3>$titre</h3>$fav
             <p>$detail</p>
-            $fav
+            <p>Note moyenne : $note | <a href="Index.php?action=review-list&id=$idSerie">Voir les commentaires</a></p>
+            
             <p>📃 Descriptif : $desc</p>
 
         HTML;
