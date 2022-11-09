@@ -69,4 +69,15 @@ class Serie
 
         return $data[0];
     }
+
+    public static function showSeriesTiles($addSerie): string
+    {
+        $series = "";
+        while ($donnees = $addSerie->fetch()) {
+            $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
+            $url = '?action=display-serie&serie=' . $donnees["id"];
+            $series .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
+        }
+        return $series;
+    }
 }
