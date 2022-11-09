@@ -12,4 +12,4 @@ ConnectionFactory::setConfig('./db.config.ini');
 
 //Affichage
 $page = new \netvod\render\RenderPage();
-$page->render();
+echo $page->render();

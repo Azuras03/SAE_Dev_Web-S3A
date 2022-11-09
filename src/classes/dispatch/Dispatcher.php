@@ -82,8 +82,6 @@ class Dispatcher
             $affichage2 .= $action->execute();
         }
         return $affichage2;
-        //$this->renderPage($affichage2);
-
 
     }
 
