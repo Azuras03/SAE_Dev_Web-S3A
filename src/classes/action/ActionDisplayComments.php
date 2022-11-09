@@ -6,6 +6,7 @@ use netvod\catalogue\Avis;
 use netvod\catalogue\Episode;
 use netvod\catalogue\Serie;
 use netvod\db\ConnectionFactory;
+use netvod\user\Review;
 use netvod\user\User;
 
 class ActionDisplayEpisode extends Action
@@ -36,7 +37,7 @@ class ActionDisplayEpisode extends Action
         $user->addEpisodeInProgress($id);
 
 
-        $comment = Serie::displayReviewForm($serId);
+        $comment = Review::displayReviewForm($serId);
         return $renderer->render() . $comment;
     }
 }
