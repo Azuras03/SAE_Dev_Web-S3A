@@ -326,10 +326,21 @@ class Dispatcher
             .logo {
                 width: 200px;
                 height: 200px;
-                display: block;
+                display: flex;
                 margin-left: auto;
                 margin-right: auto;
-            }     
+                background-color: white;
+                padding: 20px;
+                border-radius: 10%;
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+                transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+                flex-grow: 1;
+            }
+            
+            .logo:hover {
+                box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.5);
+                transform : translateY(-5px) scale(1.02);
+            }
             
             .lettre {
             margin: 0 30% 0 30%;
