@@ -78,7 +78,7 @@ class ActionDisplaySerie extends Action
 
                 return '<div class = "container"><h3>Liste des séries :</h3>
                     <form method = post>
-                        <input type="search" name="seriesearch" name="q">
+                        <input type="search" name="seriesearch" placeholder="Rechercher une série" ">
                         <select name="trierSerie" id="trierSerie" >
                             <option value="" disabled selected>Trier par...</option>
                             <option value="annee">Année</option>
