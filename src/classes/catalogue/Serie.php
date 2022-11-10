@@ -25,7 +25,6 @@ class Serie
         if (($note = self::getMoySerie($idSerie)) != 0)
             $note .= "/5";
         else $note = "Pas assez de données";
-        echo $note;
 
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT titre, descriptif, annee, date_ajout FROM serie WHERE id = ?');
@@ -65,9 +64,7 @@ class Serie
         $q = "SELECT note_moy FROM `serie` WHERE id = ?";
         $st = $db->prepare($q);
         $st->execute([$idSerie]);
-        echo $idSerie;
         $data = $st->fetch();
-        echo $data[0];
 
         return $data[0];
     }
