@@ -82,7 +82,9 @@ class RenderPage implements Renderer
                 $resultatConnexion
             </ul>
         </header>
+        <main>
         {$dispatcher->run()}
+        </main>
         <footer>
             <p>© 2022 - NetVOD🎬 - Tous droits réservés</p>
             <p><a href = "?action=informations">Informations</a></p>
