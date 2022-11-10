@@ -1,5 +1,7 @@
 <?php
 
+namespace netvod\list;
+
 use netvod\db\ConnectionFactory;
 
 class ProgressList

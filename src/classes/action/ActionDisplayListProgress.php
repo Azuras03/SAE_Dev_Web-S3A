@@ -10,9 +10,7 @@ class ActionDisplayListProgress extends Action
 
     public function execute(): string
     {
-        $html = \ProgressList::displayProgress();
+        $html = \netvod\list\ProgressList::displayProgress();
         return '<div class = "container"><h3>Liste de vos épisodes en cours 🕰️ :</h3> <p class="listeSerie">'.$html.'</p></div>';
-
-
     }
 }
