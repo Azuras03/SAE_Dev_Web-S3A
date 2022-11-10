@@ -48,7 +48,7 @@ class ActionPasswordReset extends Action
 
                 return <<<HTML
                     <head>
-                        <meta http-equiv="refresh" content="3; url=Index.php">
+                        <meta http-equiv="refresh" content="3; url=index.php">
                     </head>
                     <p>Mot de passe changé</p>
                     <p><strong>Vous allez être redirigé vers l'accueil</strong></p>

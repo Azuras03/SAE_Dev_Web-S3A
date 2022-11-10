@@ -43,14 +43,14 @@ class Serie
         $stmt->bindParam(2, unserialize($_SESSION['user'])->id);
         $stmt->execute();
         if($stmt->rowCount() != 0) {
-            $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '">✴</a>';
+            $fav = '<a class="favoriteButton" href="index.php?action=saveseriefav&id=' . $idSerie . '">✴</a>';
         }
-        else $fav = '<a class="favoriteButton" href="Index.php?action=saveseriefav&id=' . $idSerie . '&fav=ajout">⭐</a>';
+        else $fav = '<a class="favoriteButton" href="index.php?action=saveseriefav&id=' . $idSerie . '&fav=ajout">⭐</a>';
 
         return <<<HTML
             <h3>$titre</h3>$fav
             <p>$detail</p>
-            <p>Note moyenne : $note | <a href="Index.php?action=review-list&id=$idSerie">Voir les commentaires</a></p>
+            <p>Note moyenne : $note | <a href="index.php?action=review-list&id=$idSerie">Voir les commentaires</a></p>
             
             <p>📃 Descriptif : $desc</p>
 
