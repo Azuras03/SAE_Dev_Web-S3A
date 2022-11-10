@@ -28,7 +28,7 @@ class RenderPage implements Renderer
                 <a href="?action=display-serie" class="bouton">Accueil 🏠</a>
                 <a href="?action=userinfos" class="bouton">Mes informations 📜</a>
                 <a href="?action=signout" class="bouton">Se déconnecter 🚪</a>
-                <a href="?action=showfavserie" class="bouton">Vos titres préférés ⭐</a>
+                <a href="?action=showfavserie" class="bouton">Vos séries préférées ⭐</a>
                 <a href="?action=progress-list" class="bouton">Vos épisodes en cours 🕰️</a>
             HTML;
         } else {
@@ -68,10 +68,10 @@ class RenderPage implements Renderer
             <p class="connection">Vous êtes connecté en tant que <b class="nomcompte">$currUser</b></p>
             <img src="images/logo.png" class="logo" alt="Logo NetVod">
         
-            <ul class="accueilPannel">
+            <nav class="accueilPannel">
                 $menuTheme
                 $resultatConnexion
-            </ul>
+            </nav>
         </header>
         <main>
         {$dispatcher->run()}

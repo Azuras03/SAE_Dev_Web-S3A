@@ -46,5 +46,27 @@ class Episode
         return "$episode</ul>";
     }
 
+    public static function loadEpisode(): Episode
+    {
+        $idEpisode = $_GET['episode'];
+        $idSerie = $_GET['serie'];
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare('SELECT * FROM episode WHERE serie_id = ? AND numero = ?');
+        $stmt->bindParam(1, $idSerie);
+        $stmt->bindParam(2, $idEpisode);
+        $episode = "";
+        if ($stmt->execute()) {
+            $donnees = $stmt->fetch();
+            $id = $donnees['id'];
+            $numero = $donnees['numero'];
+            $titre = $donnees['titre'];
+            $resume = $donnees['resume'];
+            $duree = $donnees['duree'];
+            $file = $donnees['file'];
+            $episode = new Episode($id, $numero, $titre, $resume, $file, $duree, $idSerie);
+        }
+        return $episode;
+    }
+
 
 }
