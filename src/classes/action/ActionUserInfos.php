@@ -53,7 +53,7 @@ class ActionUserInfos extends Action
                 $_SESSION['user'] = serialize($user);
                 return <<<HTML
                     <head>
-                        <meta http-equiv="refresh" content="0;URL=index.php">
+                        <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
                     </head>
                 HTML;
             } else {

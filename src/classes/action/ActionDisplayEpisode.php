@@ -29,7 +29,6 @@ class ActionDisplayEpisode extends Action
             $resume = $donnees['resume'];
             $duree = $donnees['duree'];
             $file = $donnees['file'];
-            //$serId = $donnees['serie_id'];
             $episode = new Episode($id, $numero, $titre, $resume, $file, $duree, $idSerie);
         }
         $renderer = new \netvod\render\RenderEpisode($episode);
