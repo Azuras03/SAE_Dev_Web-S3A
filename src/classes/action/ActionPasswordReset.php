@@ -5,6 +5,9 @@ namespace netvod\action;
 use netvod\db\ConnectionFactory;
 use netvod\user\User;
 
+/**
+ * Used to reset the password of a user
+ */
 class ActionPasswordReset extends Action
 {
 
