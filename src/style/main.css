@@ -67,12 +67,17 @@ a {
     transform: scale(0.8);
 }
 
-#theme {
+li
+{
+    list-style: none;
+}
+
+.theme {
     color: #8b99f5;
     border: solid 7px #2f1c9d;
 }
 
-#theme:hover {
+.theme:hover {
     color: white;
     background-color: #2f1c9d;
     box-shadow: 0 0 10px #3442e2;

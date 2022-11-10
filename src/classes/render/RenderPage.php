@@ -18,14 +18,10 @@ class RenderPage implements Renderer
         $connected = false;
         $currUser = 'invité';
 
-        //if (!isset($_SESSION['CSSThemeChanges'])) $_SESSION['CSSThemeChanges'] = '';
-
         if (isset($_SESSION['user'])) {
             $currUser = unserialize($_SESSION['user'])->email;
             $connected = true;
         }
-
-        //if (!isset($_SESSION['theme'])) $_SESSION['theme'] = 'colorBackgroundChangeLight';
 
         if ($connected) {
             $resultatConnexion = <<<HTML
@@ -42,12 +38,18 @@ class RenderPage implements Renderer
             HTML;
         }
 
-        //$themeToChange = $_SESSION['CSSThemeChanges'];
-
-        //$_SESSION['autoTheme']
         if (!isset($_SESSION['theme'])) $_SESSION['theme'] = "";
         $srcStyleTheme = Theme::getSrcStylesheet();
-        //if (($currTheme = $_SESSION["theme"]) == "") $currTheme = Theme::LIGHT;
+
+        if ($_SESSION["theme"] == "")
+            $menuTheme = <<<HTML
+                <a href="?action=chgtheme" class="bouton theme">Manual Theme ♦</a>
+            HTML;
+        else
+            $menuTheme = <<<HTML
+                <a href="?action=autotheme" class="bouton theme">Auto Theme ♦</a>
+                <a href="?action=chgtheme" class="bouton theme">Switch Theme 🔁</a>
+                HTML;
 
         $dispatcher = new Dispatcher();
         return <<<HTML
@@ -67,8 +69,7 @@ class RenderPage implements Renderer
             <img src="images/logo.png" class="logo" alt="Logo NetVod">
         
             <ul class="accueilPannel">
-                <a href="?action=chgtheme" class="bouton" id="theme">Change Theme ♦</a>
-                <a href="?action=autotheme" class="bouton" id="theme">Auto Theme </a>
+                $menuTheme
                 $resultatConnexion
             </ul>
         </header>
