@@ -83,6 +83,10 @@ class RenderPage implements Renderer
             </ul>
         </header>
         {$dispatcher->run()}
+        <footer>
+            <p>© 2022 - NetVOD🎬 - Tous droits réservés</p>
+            <p><a href = "?action=informations">Informations</a></p>
+        </footer>
         </body></html>
         HTML;
     }
