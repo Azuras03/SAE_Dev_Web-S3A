@@ -13,9 +13,10 @@ class ActionDisplaySerie extends Action
     public function execute(): string
     {
         if (isset($_GET['serie'])) {
+            $review = Review::displayReviewForm($_GET['serie']); //Astuce pour que la note soit actualisée au chargement de la page.
             $html = Serie::displaySerie();
             $html .= Episode::displayDataEpisode();
-            $html .= Review::displayReviewForm($_GET['serie']);
+            $html .= $review;
             return $html;
         } else {
             if (isset($_SESSION['user'])) {
