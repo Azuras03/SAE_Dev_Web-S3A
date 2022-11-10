@@ -40,10 +40,11 @@ class ActionChangeTheme extends Action
             }
             ';
         }
-        return '
+        return <<<HTML
         <head>
-            <meta http-equiv="refresh" content="0;URL=Index.php">
+            <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
         </head>
-        <p>Changé 🟢</p>';
+        <p>Changé 🟢</p>
+        HTML;
     }
 }

@@ -5,6 +5,7 @@ namespace netvod\action;
 use netvod\catalogue\Episode;
 use netvod\catalogue\Serie;
 use netvod\db\ConnectionFactory;
+use netvod\review\Review;
 
 class ActionDisplaySerie extends Action
 {
@@ -14,6 +15,7 @@ class ActionDisplaySerie extends Action
         if (isset($_GET['serie'])) {
             $html = Serie::displaySerie();
             $html .= Episode::displayDataEpisode();
+            $html .= Review::displayReviewForm($_GET['serie']);
             return $html;
         } else {
             if (isset($_SESSION['user'])) {
@@ -21,29 +23,18 @@ class ActionDisplaySerie extends Action
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                     $addSerie = $db->prepare("SELECT titre, img, id FROM serie");
-                    $series = "";
-                    if ($addSerie->execute()) {
-                        while ($donnees = $addSerie->fetch()) {
-                            $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                            $url = '?action=display-serie&serie=' . $donnees["id"];
-                            $series .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
-                        }
-                    }
+
+                    if ($addSerie->execute())
+                        $series = Serie::showSeriesTiles($addSerie);
                 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST ['seriesearch'])) {
                         $string = filter_var($_POST['seriesearch'], FILTER_SANITIZE_STRING);
                         $addSerie = $db->prepare("SELECT titre, img, id FROM serie WHERE titre LIKE '%$string%' OR descriptif LIKE '%$string%'");
                         $series = "";
                         if ($addSerie->execute()) {
-                            if ($addSerie->rowCount() != 0) {
-                                while ($donnees = $addSerie->fetch()) {
-                                    $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                                    $url = '?action=display-serie&serie=' . $donnees["id"];
-                                    $series .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
-                                }
-                            } else {
-                                $series = "<p>Aucune série ne correspond à votre recherche</p>";
-                            }
+                            if ($addSerie->rowCount() != 0)
+                                $series = Serie::showSeriesTiles($addSerie);
+                            else $series = "<p>Aucune série ne correspond à votre recherche</p>";
                         }
                     }
                     if (isset($_POST ['trierSerie'])) {
@@ -59,17 +50,16 @@ class ActionDisplaySerie extends Action
                             case 'nbepisodes':
                                 $query = "SELECT serie.titre, serie.img, serie.id, COUNT(*) FROM serie INNER JOIN episode ON serie.id = episode.serie_id GROUP BY serie.titre, serie.img, serie.id ORDER BY COUNT(*)";
                                 break;
+                            case 'note':
+                                $query = "SELECT titre, img, id FROM serie ORDER BY note_moy";
+                                break;
                             default:
                                 $query = "SELECT titre, img, id FROM serie";
                                 break;
                         }
                         $addSerie = $db->prepare($query . ' ' . $_POST['triCrDr']);
                         if ($addSerie->execute()) {
-                            while ($donnees = $addSerie->fetch()) {
-                                $minia = '<img src="images/' . $donnees["img"] . '" height=200px width=500px>';
-                                $url = '?action=display-serie&serie=' . $donnees["id"];
-                                $series .= '<a href=' . $url . ' class="titreSerie"><div class ="rectangleSerie">' . $donnees['titre'] . '<br>' . $minia . '</div></a></br>';
-                            }
+                            $series = Serie::showSeriesTiles($addSerie);
                         } else {
                             $series = "<p>Une erreur est survenue</p>";
                         }
@@ -84,10 +74,11 @@ class ActionDisplaySerie extends Action
                             <option value="annee">Année</option>
                             <option value="titre">Titre</option>
                             <option value="nbepisodes">NbEp</option>
+                            <option value="note">Note</option>
                         </select>
                         <select name="triCrDr" id="triCrDr" >
                             <option value="ASC">🔺</option>
-                            <option value="DESC">🔻</option>
+                            <option selected value="DESC">🔻</option>
                         </select>
                         <button>🔎</button>
                     </form>

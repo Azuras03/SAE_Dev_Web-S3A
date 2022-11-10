@@ -38,38 +38,6 @@ class User
         return null;
     }
 
-    public static function insertAvis($commentaire, $note, $serie_id) : int|bool
-    {
-        $db = ConnectionFactory::makeConnection();
-        $commentaire = filter_var($commentaire, FILTER_SANITIZE_SPECIAL_CHARS);
-        $note = filter_var($note, FILTER_SANITIZE_NUMBER_INT);
-
-        if ($note < 0 || $note > 5) return false;
-
-        $q = "SELECT count(*) FROM avis WHERE id_user = ? AND id_serie = ?";
-        $st = $db->prepare($q);
-        $st->execute([unserialize($_SESSION['user'])->id, $serie_id]);
-        $data = $st->fetch();
-
-        if ($data[0] > 0)
-        {
-            $q = "UPDATE avis
-                SET note = ?, comment = ?
-                WHERE id_user = ?
-                AND id_serie = ?";
-            $st = $db->prepare($q);
-            $st->execute([$note, $commentaire, unserialize($_SESSION['user'])->id, $serie_id]);
-            return 2;
-        }
-        else
-        {
-            $q = "INSERT INTO avis(id_user, id_serie, note, comment) VALUES (?,?,?,?)";
-            $st = $db->prepare($q);
-            $st->execute([unserialize($_SESSION['user'])->id, $serie_id, $note, $commentaire]);
-            return 1;
-        }
-    }
-
     /**
      * @throws NonEditablePropertyException
      */
@@ -82,16 +50,8 @@ class User
         }
     }
 
-    /**
-     * @throws InvalidPropertyValueException
-     */
     public function isAddEpisodeInProgress (string $epId) : bool
     {
-        /*
-        if (!isset($_SESSION["episode"])) throw new InvalidPropertyValueException("\$_SESSION[\"episode\"]", "Inexistant");
-        $ep = unserialize($_SESSION["episode"]);
-
-*/
         $db = ConnectionFactory::makeConnection();
         $q = "SELECT id_user, id_episode FROM `userprogressepisode` 
                 WHERE id_user = ?
@@ -105,7 +65,7 @@ class User
         return true;
     }
 
-    public function addEpisodeInProgress (string $id)
+    public function addEpisodeInProgress (string $id): void
     {
         if (!$this->isAddEpisodeInProgress($id)) return;
 
