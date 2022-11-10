@@ -1,13 +1,13 @@
 <?php
 
-namespace netvod\review;
+namespace netvod\list;
 
 use netvod\catalogue\Serie;
 use netvod\db\ConnectionFactory;
 
 class FavList
 {
-    public static function preferedSeries() : string
+    public static function displayFavSeries() : string
     {
         $db = ConnectionFactory::makeConnection();
         $seriesPref = "";
