@@ -137,7 +137,7 @@ class Serie
                         </select>
                         <button>🔎</button>
                     </form>
-                  <p class="listeSerie">' . $series . '</p></div>
+                  <p class="listeSerie"> $series </p></div>
                   HTML;
         }
         return "";
