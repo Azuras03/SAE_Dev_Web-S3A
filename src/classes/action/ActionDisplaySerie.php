@@ -39,24 +39,13 @@ class ActionDisplaySerie extends Action
                     }
                     if (isset($_POST ['trierSerie'])) {
                         $series = "";
-                        $query = "";
-                        switch ($_POST['trierSerie']) {
-                            case 'titre':
-                                $query = "SELECT titre, img, id FROM serie ORDER BY titre";
-                                break;
-                            case 'annee':
-                                $query = "SELECT titre, img, id FROM serie ORDER BY annee";
-                                break;
-                            case 'nbepisodes':
-                                $query = "SELECT serie.titre, serie.img, serie.id, COUNT(*) FROM serie INNER JOIN episode ON serie.id = episode.serie_id GROUP BY serie.titre, serie.img, serie.id ORDER BY COUNT(*)";
-                                break;
-                            case 'note':
-                                $query = "SELECT titre, img, id FROM serie ORDER BY note_moy";
-                                break;
-                            default:
-                                $query = "SELECT titre, img, id FROM serie";
-                                break;
-                        }
+                        $query = match ($_POST['trierSerie']) {
+                            'titre' => "SELECT titre, img, id FROM serie ORDER BY titre",
+                            'annee' => "SELECT titre, img, id FROM serie ORDER BY annee",
+                            'nbepisodes' => "SELECT serie.titre, serie.img, serie.id, COUNT(*) FROM serie INNER JOIN episode ON serie.id = episode.serie_id GROUP BY serie.titre, serie.img, serie.id ORDER BY COUNT(*)",
+                            'note' => "SELECT titre, img, id FROM serie ORDER BY note_moy",
+                            default => "SELECT titre, img, id FROM serie",
+                        };
                         $addSerie = $db->prepare($query . ' ' . $_POST['triCrDr']);
                         if ($addSerie->execute()) {
                             $series = Serie::showSeriesTiles($addSerie);

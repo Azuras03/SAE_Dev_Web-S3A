@@ -28,7 +28,7 @@ class ActionDisplayListProgress extends Action
             }
             $html .= "</ul>";
         }
-        if ($init === $html) $html = "Commencez à regarder des épisodes et ils s'afficheront ici !";
+        if ($init === $html) $html = "Commencez à regarder des épisodes et ils s'afficheront ici ! 🍿";
 
         return '<div class = "container"><h3>Liste de vos épisodes en cours 🕰️ :</h3> <p class="listeSerie">'.$html.'</p></div>';
 
