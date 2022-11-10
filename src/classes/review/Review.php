@@ -10,8 +10,9 @@ class Review
     public static function displayReviews(int $serId) : string
     {
         $db = ConnectionFactory::makeConnection();
-        $q = "SELECT email, note, comment FROM `avis`, user
+        $q = "SELECT pseudo, note, comment FROM `avis`, user, userinfo
                 WHERE avis.id_user = user.id
+                AND user.id = userinfo.id_user
                 AND id_serie = ?";
         $st = $db->prepare($q);
         $st->execute([$serId]);
@@ -21,7 +22,7 @@ class Review
         foreach ($st as $data) {
             $html .= <<<HTML
                     <article>
-                        <small><p> <b>{$data['email']}</b> ({$data['note']}/5) a écrit :</p></small>
+                        <small><p> <b>{$data['pseudo']}</b> ({$data['note']}/5) a écrit :</p></small>
                         <p></p>
                         <p>{$data['comment']}</p>
                     </article>
