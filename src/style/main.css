@@ -136,6 +136,10 @@ h3 {
     text-align: center;
 }
 
+main {
+    margin-bottom: 150px
+}
+
 .rectangleSerie{
     background-color: #1d6c80;
     margin-bottom: 40px;
