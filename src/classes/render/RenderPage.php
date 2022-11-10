@@ -68,6 +68,7 @@ class RenderPage implements Renderer
         
             <ul class="accueilPannel">
                 <a href="?action=chgtheme" class="bouton" id="theme">Change Theme ♦</a>
+                <a href="?action=autotheme" class="bouton" id="theme">Auto Theme </a>
                 $resultatConnexion
             </ul>
         </header>

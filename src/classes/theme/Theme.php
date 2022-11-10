@@ -30,7 +30,7 @@ class Theme
         else $_SESSION['theme'] = self::LIGHT;
     }
 
-    public function switchAutoTheme() : void
+    public static function switchAutoTheme() : void
     {
         $_SESSION['theme'] = self::AUTO;
     }

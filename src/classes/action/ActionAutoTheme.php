@@ -2,14 +2,14 @@
 
 namespace netvod\action;
 
-use netvod\dispatch\Dispatcher;
 use netvod\theme\Theme;
 
-class ActionChangeTheme extends Action
+class ActionAutoTheme extends Action
 {
-    public function execute(): string
+
+    public function execute() : string
     {
-        Theme::changeTheme();
+        Theme::switchAutoTheme();
         return <<<HTML
         <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
         <p>Changé 🟢</p>

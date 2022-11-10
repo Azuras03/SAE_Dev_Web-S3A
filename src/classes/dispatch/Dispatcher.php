@@ -61,6 +61,10 @@ class Dispatcher
                     $action = new \netvod\action\ActionChangeTheme();
                     $affichage2 .= $action->execute();
                     break;
+                case "autotheme" :
+                    $action = new \netvod\action\ActionAutoTheme();
+                    $affichage2 .= $action->execute();
+                    break;
                 case "signout" :
                     $action = new \netvod\action\ActionSignOut();
                     $affichage2 .= $action->execute();
