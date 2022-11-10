@@ -1,3 +1,12 @@
+@keyframes colorBackgroundChangeDark {
+    0%{
+        background-color: #171717;
+    }
+    100%{
+        background-color: #0c0c0c;
+    }
+}
+
 p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
     color: white;
 }
@@ -14,7 +23,6 @@ p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
     box-shadow: 0 0 10px 0 rgba(255, 255, 255);
 }
 
-html
-{
-    animation: color-background-change-dark 1s infinite alternate-reverse;
+html {
+    animation: colorBackgroundChangeDark 1s infinite alternate-reverse;
 }

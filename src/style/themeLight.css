@@ -1,3 +1,12 @@
+@keyframes colorBackgroundChangeLight {
+    0%{
+        background-color: #ffffff;
+    }
+    100%{
+        background-color: #f1f1f1;
+    }
+}
+
 p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
     color: black;
 }
@@ -12,4 +21,8 @@ p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
 
 .rectangleSerie:hover{
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+html {
+    animation: colorBackgroundChangeLight 1s infinite alternate-reverse;
 }

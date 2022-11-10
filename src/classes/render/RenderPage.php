@@ -44,9 +44,10 @@ class RenderPage implements Renderer
 
         //$themeToChange = $_SESSION['CSSThemeChanges'];
 
+        //$_SESSION['autoTheme']
         if (!isset($_SESSION['theme'])) $_SESSION['theme'] = "";
         $srcStyleTheme = Theme::getSrcStylesheet();
-        $currTheme = $_SESSION["theme"];
+        //if (($currTheme = $_SESSION["theme"]) == "") $currTheme = Theme::LIGHT;
 
         $dispatcher = new Dispatcher();
         return <<<HTML
@@ -59,11 +60,6 @@ class RenderPage implements Renderer
          <title>NetVOD</title>
          <link rel="stylesheet" href="src/style/main.css">
          <link rel="stylesheet" href="$srcStyleTheme">
-         <style>
-         html {
-                animation: $currTheme 1s infinite alternate-reverse;
-            }     
-        </style>
         </head>        
         <body>
         <header>

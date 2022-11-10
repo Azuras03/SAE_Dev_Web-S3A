@@ -7,6 +7,9 @@ class Theme
     public const ROOT_LIGHT = "src/style/themeLight.css";
     public const ROOT_DARK = "src/style/themeDark.css";
     public const ROOT_AUTO = "src/style/themeAuto.css";
+    public const LIGHT = "colorBackgroundChangeLight";
+    public const DARK = "colorBackgroundChangeDark";
+    public const AUTO = "";
 
     public static function getSrcStylesheet() : string
     {
@@ -20,10 +23,15 @@ class Theme
 
     public static function changeTheme() : void
     {
-        //if ($isAuto) $_SESSION['theme'] = "";
-        //else
-        if ($_SESSION['theme'] == 'colorBackgroundChangeLight')
-            $_SESSION['theme'] = 'colorBackgroundChangeDark';
-        else $_SESSION['theme'] = 'colorBackgroundChangeLight';
+        //if (!isset($_SESSION['autoTheme']) || $_SESSION['autoTheme']) $_SESSION['autoTheme'] = false;
+
+        if ($_SESSION['theme'] == self::LIGHT)
+            $_SESSION['theme'] = self::DARK;
+        else $_SESSION['theme'] = self::LIGHT;
+    }
+
+    public function switchAutoTheme() : void
+    {
+        $_SESSION['theme'] = self::AUTO;
     }
 }

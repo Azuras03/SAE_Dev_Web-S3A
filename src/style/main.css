@@ -16,24 +16,6 @@ body {
     }
 }
 
-@keyframes colorBackgroundChangeLight {
-    0%{
-        background-color: #ffffff;
-    }
-    100%{
-        background-color: #f1f1f1;
-    }
-}
-
-@keyframes colorBackgroundChangeDark {
-    0%{
-        background-color: #171717;
-    }
-    100%{
-        background-color: #0c0c0c;
-    }
-}
-
 .favoriteButton {
     font-size: 3em;
 }
