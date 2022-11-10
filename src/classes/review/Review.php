@@ -21,7 +21,7 @@ class Review
         foreach ($st as $data) {
             $html .= <<<HTML
                     <article>
-                        <small> <b>{$data['email']}</b> ({$data['note']}/5) a écrit :</small>
+                        <small><p> <b>{$data['email']}</b> ({$data['note']}/5) a écrit :</p></small>
                         <p></p>
                         <p>{$data['comment']}</p>
                     </article>
