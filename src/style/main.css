@@ -115,7 +115,9 @@ h3 {
 
 .titreSerie {
     text-decoration: none;
-    color: #34BBE2;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Poppins SemiBold";
 }
 
 .listSerie {
@@ -131,10 +133,9 @@ h3 {
 }
 
 .rectangleSerie{
-    background-color: #006f8a;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    background-color: #1d6c80;
     margin-bottom: 40px;
-    border : 10px solid #6eb4c5;
+    border : 10px solid #bcd2d7;
     padding: 10px;
     border-radius: 10px;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);

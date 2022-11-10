@@ -22,6 +22,10 @@ class ActionChangeTheme extends Action
             .logo:hover{
                 filter : invert(90%);
             }
+            
+            .rectangleSerie:hover{
+                box-shadow: 0 0 10px 0 rgba(255, 255, 255);
+            }
             ';
 
         } else {
@@ -38,6 +42,11 @@ class ActionChangeTheme extends Action
             .logo:hover{
                 filter : invert(10%);
             }
+            
+            .rectangleSerie:hover{
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+            }
+            
             ';
         }
         return <<<HTML
