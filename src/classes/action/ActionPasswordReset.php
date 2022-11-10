@@ -46,13 +46,6 @@ class ActionPasswordReset extends Action
                 $stmt3 = $db->prepare("UPDATE user SET resetpwd_token = NULL WHERE resetpwd_token = ?");
                 $stmt3->execute([$token]);
 
-
-                $res = $stmt2->fetch(\PDO::FETCH_ASSOC);
-                $mail = $res['email'];
-
-                $user = User::userByEmail($mail);
-                $_SESSION['user'] = serialize($user);
-
                 return <<<HTML
                     <head>
                         <meta http-equiv="refresh" content="3; url=Index.php">

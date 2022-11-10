@@ -44,20 +44,22 @@ class ActionUserInfos extends Action
             $date_naissance = filter_var($_POST['date_naissance'], FILTER_SANITIZE_STRING);
 
             $db = ConnectionFactory::makeConnection();
-            $stmt = $db->prepare('UPDATE userinfo SET prenom = ?, nom = ?, pseudo = ?, date_naissance = ? WHERE id_user = ?');
-            if ($stmt->execute([$prenom, $nom, $pseudo, $date_naissance, $user->id])) {
+            $stmt = $db->prepare('INSERT INTO userinfo (id_user, prenom, nom, pseudo, date_naissance) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE prenom = ?, nom = ?, pseudo = ?, date_naissance = ?');
+            if ($stmt->execute([$user->id, $prenom, $nom, $pseudo, $date_naissance, $prenom, $nom, $pseudo, $date_naissance])) {
                 $user->infos[0]['prenom'] = $prenom;
                 $user->infos[0]['nom'] = $nom;
                 $user->infos[0]['pseudo'] = $pseudo;
                 $user->infos[0]['date_naissance'] = $date_naissance;
                 $_SESSION['user'] = serialize($user);
                 return <<<HTML
-                <h3>Vos informations ont été modifiées</h3>
-            HTML;
+                    <head>
+                        <meta http-equiv="refresh" content="0;URL=Index.php">
+                    </head>
+                HTML;
             } else {
                 return <<<HTML
-                Une erreur s'est produite
-            HTML;
+                    Une erreur s'est produite : Impossible de modifier vos infos
+                HTML;
             }
         }
     }
