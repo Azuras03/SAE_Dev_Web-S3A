@@ -50,9 +50,7 @@ class ActionChangeTheme extends Action
             ';
         }
         return <<<HTML
-        <head>
-            <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
-        </head>
+        <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
         <p>Changé 🟢</p>
         HTML;
     }

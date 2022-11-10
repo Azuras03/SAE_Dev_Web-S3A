@@ -9,7 +9,10 @@ class ActionSaveSeriePref extends Action
 
     public function execute(): string
     {
-        $res = "<p>Série retirée 🟢</p>";
+        $meta = <<<HTML
+        <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
+        HTML;
+        $res = "$meta <p>Série retirée 🟢</p>";
         $sql = "DELETE FROM `user2serie` WHERE id_user = ? AND id_serie = ?;";
         $sql2 = "INSERT INTO `user2serie` VALUES (?, ?)";
         $db = ConnectionFactory::makeConnection();
@@ -23,7 +26,7 @@ class ActionSaveSeriePref extends Action
             $stmt->execute();
             if(isset($_GET['fav'])){
                 $stmt2->execute();
-                $res = "<p>Série ajoutée 🟢</p>";
+                $res = "$meta <p>Série ajoutée 🟢</p>";
             }
         }
         catch (\PDOException $e){
