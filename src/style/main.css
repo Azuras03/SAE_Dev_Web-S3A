@@ -284,3 +284,9 @@ footer a:hover {
     align-content: center;
     justify-items: center;
 }
+
+@media screen and (max-width: 900px) {
+    a{
+        font-size: 0.8em;
+    }
+}
