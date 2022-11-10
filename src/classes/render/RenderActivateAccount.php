@@ -4,6 +4,9 @@ namespace netvod\render;
 
 use netvod\user\User;
 
+/**
+ * Used to return the activate account view
+ */
 class RenderActivateAccount implements Renderer
 {
 

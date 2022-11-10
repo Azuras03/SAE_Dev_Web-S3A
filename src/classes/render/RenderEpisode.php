@@ -5,6 +5,9 @@ namespace netvod\render;
 use netvod\catalogue\Episode;
 use netvod\db\ConnectionFactory;
 
+/**
+ * Used to return the episode view
+ */
 class RenderEpisode implements Renderer
 {
 

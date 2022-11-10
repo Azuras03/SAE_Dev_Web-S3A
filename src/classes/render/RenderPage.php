@@ -6,7 +6,7 @@ use netvod\dispatch\Dispatcher;
 use netvod\theme\Theme;
 
 /**
- * Return the complete HTML page
+ * Used to return the complete HTML page
  */
 class RenderPage implements Renderer
 {

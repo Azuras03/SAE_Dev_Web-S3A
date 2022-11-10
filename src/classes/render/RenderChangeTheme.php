@@ -2,6 +2,9 @@
 
 namespace netvod\render;
 
+/**
+ * Used to return the change theme view
+ */
 class RenderChangeTheme implements Renderer
 {
 
