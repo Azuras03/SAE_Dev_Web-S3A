@@ -73,9 +73,14 @@ class Dispatcher
                     $action = new \netvod\action\ActionEmailPasswordReset();
                     $affichage2 .= $action->execute();
                     break;
-                    case "passwordreset":
+                case "passwordreset":
                     $action = new \netvod\action\ActionPasswordReset();
                     $affichage2 .= $action->execute();
+                    break;
+                case "informations":
+                    $action = new \netvod\action\ActionInformations();
+                    $affichage2 .= $action->execute();
+                    break;
             }
         } else {
             $action = new \netvod\action\ActionDisplaySerie();
