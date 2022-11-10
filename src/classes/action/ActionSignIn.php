@@ -46,7 +46,7 @@ class ActionSignIn extends Action
 
                 return <<<HTML
                    <head>
-                        <meta http-equiv="refresh" content="0;URL=Index.php">
+                        <meta http-equiv="refresh" content="0;URL=index.php">
                    </head>
                 HTML;
 

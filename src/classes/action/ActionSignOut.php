@@ -8,7 +8,7 @@ class ActionSignOut extends Action
     public function execute(): string
     {
         session_destroy();
-        header('Location: Index.php');
+        header('Location: index.php');
         return "";
     }
 }
