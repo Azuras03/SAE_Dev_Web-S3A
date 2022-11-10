@@ -1,0 +1,15 @@
+p, h3, h1, h2, h3, h4, #titreEpisode, #resumeEpisode, li, label{
+    color: black;
+}
+
+.logo{
+    filter : invert(0%);
+}
+
+.logo:hover{
+    filter : invert(10%);
+}
+
+.rectangleSerie:hover{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}

@@ -3,6 +3,7 @@
 namespace netvod\render;
 
 use netvod\dispatch\Dispatcher;
+use netvod\theme\Theme;
 
 class RenderPage implements Renderer
 {
@@ -16,17 +17,15 @@ class RenderPage implements Renderer
         $affichage = "";
         $connected = false;
         $currUser = 'invité';
-        if (!isset($_SESSION['CSSThemeChanges']))
-            $_SESSION['CSSThemeChanges'] = '';
+
+        //if (!isset($_SESSION['CSSThemeChanges'])) $_SESSION['CSSThemeChanges'] = '';
 
         if (isset($_SESSION['user'])) {
             $currUser = unserialize($_SESSION['user'])->email;
             $connected = true;
         }
 
-        if (!isset($_SESSION['theme'])) {
-            $_SESSION['theme'] = 'colorBackgroundChangeLight';
-        }
+        //if (!isset($_SESSION['theme'])) $_SESSION['theme'] = 'colorBackgroundChangeLight';
 
         if ($connected) {
             $resultatConnexion = <<<HTML
@@ -43,8 +42,12 @@ class RenderPage implements Renderer
             HTML;
         }
 
-        $currTheme = $_SESSION['theme'];
-        $themeToChange = $_SESSION['CSSThemeChanges'];
+        //$themeToChange = $_SESSION['CSSThemeChanges'];
+
+        if (!isset($_SESSION['theme'])) $_SESSION['theme'] = "";
+        Theme::changeTheme();
+        $srcStyleTheme = Theme::getSrcStylesheet();
+        $currTheme = $_SESSION["theme"];
 
         $dispatcher = new Dispatcher();
         return <<<HTML
@@ -56,20 +59,11 @@ class RenderPage implements Renderer
                      <meta http-equiv="X-UA-Compatible" content="ie=edge">
          <title>NetVOD</title>
          <link rel="stylesheet" href="src/style/main.css">
+         <link rel="stylesheet" href="$srcStyleTheme">
          <style>
          html {
-                animation-name: opacityIntro;
-                animation-direction: normal;
-                animation-iteration-count: 1;
-                animation-duration: 2s;
-                transition: 1s all cubic-bezier(0, 0, 0, 1);
-                width: 100%;
-                font-family: 'Roboto', sans-serif;
                 animation: $currTheme 1s infinite alternate-reverse;
-                background-color: rgb(120, 120, 120, 0.3);
-                margin: 0 0 0 0;
             }     
-           $themeToChange
         </style>
         </head>        
         <body>

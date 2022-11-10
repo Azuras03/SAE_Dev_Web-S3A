@@ -289,6 +289,18 @@ footer a:hover {
     justify-items: center;
 }
 
+html {
+    animation-name: opacityIntro;
+    animation-direction: normal;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    transition: 1s all cubic-bezier(0, 0, 0, 1);
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(120, 120, 120, 0.3);
+    margin: 0 0 0 0;
+}
+
 @media screen and (max-width: 900px) {
     a{
         font-size: 0.8em;

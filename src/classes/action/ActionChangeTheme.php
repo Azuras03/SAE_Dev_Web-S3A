@@ -3,11 +3,14 @@
 namespace netvod\action;
 
 use netvod\dispatch\Dispatcher;
+use netvod\theme\Theme;
 
 class ActionChangeTheme extends Action
 {
     public function execute(): string
     {
+        Theme::changeTheme();
+        /*
         if ($_SESSION['theme'] == 'colorBackgroundChangeLight') {
             $_SESSION['theme'] = 'colorBackgroundChangeDark';
             $_SESSION['CSSThemeChanges'] .= '
@@ -48,7 +51,7 @@ class ActionChangeTheme extends Action
             }
             
             ';
-        }
+        }*/
         return <<<HTML
         <meta http-equiv="refresh" content="0;URL={$_SERVER["HTTP_REFERER"]}">
         <p>Changé 🟢</p>
