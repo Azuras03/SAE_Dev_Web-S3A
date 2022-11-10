@@ -5,13 +5,11 @@ namespace netvod\render;
 use netvod\dispatch\Dispatcher;
 use netvod\theme\Theme;
 
+/**
+ * Return the complete HTML page
+ */
 class RenderPage implements Renderer
 {
-
-    public function __construct()
-    {
-    }
-
     public function render(): string
     {
         $affichage = "";
