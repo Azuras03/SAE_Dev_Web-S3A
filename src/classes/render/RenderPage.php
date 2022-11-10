@@ -45,7 +45,6 @@ class RenderPage implements Renderer
         //$themeToChange = $_SESSION['CSSThemeChanges'];
 
         if (!isset($_SESSION['theme'])) $_SESSION['theme'] = "";
-        Theme::changeTheme();
         $srcStyleTheme = Theme::getSrcStylesheet();
         $currTheme = $_SESSION["theme"];
 
