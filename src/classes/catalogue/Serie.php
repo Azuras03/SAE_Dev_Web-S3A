@@ -22,9 +22,10 @@ class Serie
     public static function displaySerie (): string
     {
         $idSerie = $_GET['serie'];
-        if ($note = self::getMoySerie($idSerie) != 0)
+        if (($note = self::getMoySerie($idSerie)) != 0)
             $note .= "/5";
         else $note = "Pas assez de données";
+        echo $note;
 
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT titre, descriptif, annee, date_ajout FROM serie WHERE id = ?');
@@ -58,13 +59,15 @@ class Serie
     }
 
 
-    public static function getMoySerie(mixed $idSerie)
+    public static function getMoySerie(mixed $idSerie) : string
     {
         $db = ConnectionFactory::makeConnection();
         $q = "SELECT note_moy FROM `serie` WHERE id = ?";
         $st = $db->prepare($q);
         $st->execute([$idSerie]);
+        echo $idSerie;
         $data = $st->fetch();
+        echo $data[0];
 
         return $data[0];
     }
