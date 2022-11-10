@@ -119,9 +119,11 @@ class Serie
                 }
             }
 
-            return '<div class = "container"><h3>Liste des séries :</h3>
-                    <form method = post>
-                        <input type="search" name="seriesearch" placeholder="Rechercher une série" ">
+            if (!isset($_POST["seriesearch"])) $_POST["seriesearch"] = "";
+            return <<<HTML
+                    <div class = "container"><h3>Liste des séries :</h3>
+                    <form method = "post">
+                        <input type="search" name="seriesearch" placeholder="Rechercher une série" value="{$_POST["seriesearch"]}">
                         <select name="trierSerie" id="trierSerie" >
                             <option value="" disabled selected>Trier par...</option>
                             <option value="annee">Année</option>
@@ -135,7 +137,8 @@ class Serie
                         </select>
                         <button>🔎</button>
                     </form>
-                  <p class="listeSerie">' . $series . '</p></div>';
+                  <p class="listeSerie">' . $series . '</p></div>
+                  HTML;
         }
         return "";
     }
