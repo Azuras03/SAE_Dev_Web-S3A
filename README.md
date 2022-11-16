@@ -18,7 +18,7 @@ Just click on the signup button (S’inscrire), and type your email address, and
 
 ### Sign in :
 On the front page, click on the sign-in button (Se connecter), type your email address, and password, then submit. You’re connected to NetVOD!
-#### Did you forgot your password?
+#### Did you forget your password?
 NetVOD includes a forgot password service, when you are on the sign-in page, click on “Forgot password ?” (Mot de passe oublié ?), then type your email address, and you will immediately receive a message with a link to reset your password! When you are done changing it, you are good to go!
 
 ### Edit your personal information: 
@@ -27,12 +27,8 @@ When you’re connected to NetVOD, you can manage your profile data on the main 
 ### Add series to the favorite list : 
 You can add a series to your favorite list by clicking on the yellow star on the series presentation page. Then you’ll be able to find it in the favorite list accessible by clicking on the button “My favorite series” (Vos séries préférées).
 
-
-
 ### Switch theme : 
 Allow you to choose the background color: light or dark. It switches to dark when it’s white and to white when it’s dark.
-
-
 
 #### Webetu link : 
 https://webetu.iutnc.univ-lorraine.fr/www/russo24u/
