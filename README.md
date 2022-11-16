@@ -1,12 +1,12 @@
 ## Here is NetVOD! 🎬
 The new streaming app that brings all your favorite series in one place.
 
-## Interface
+## 🟢 Interface
 ### Header
 The header contains all the different actions you can do on NetVOD, which are switching themes, going to the home page, signing in, registering, and much more when you are connected, like changing personal information, checking your favourite shows, checking the shows you just watched, and also logging out.
 Every button has been designed to be user responsive.
 
-### 🟢 Main content
+### Main content
 When you are logged out, the main page is blank, and the buttons to sign in and register are shown, so you can access the huge NetVOD catalog.
 When you are logged in, you directly have access to the catalog that you can immediately broadcast.
 NetVOD has a vast search engine, so you exactly find what you are looking for. You can for example search for words your serie (title or description) contains, but not only ! Indeed, you can sort the catalog with different factors, like the title, the number of episodes, the user rating or also the year of release.
