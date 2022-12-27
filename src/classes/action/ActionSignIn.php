@@ -32,7 +32,7 @@ class ActionSignIn extends Action
             </form>           
             HTML;
         } else {
-            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
             if (Authentification::authenticate($email, $password)) {
                 $user = User::userByEmail($email);

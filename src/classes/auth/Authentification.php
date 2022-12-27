@@ -75,11 +75,4 @@ class Authentification
         $bytes = random_bytes(10);
         return bin2hex($bytes);
     }
-
-    public static function userByToken(string $token)
-    {
-
-    }
-
-
 }
